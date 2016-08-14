@@ -1,0 +1,122 @@
+<extend name="Public:base" />
+<block name="title">{$detail.name}-{$config.webname}</block>
+<block name="head">
+<link rel="stylesheet" href="__PUBLIC__/css/articledetail.css">
+<link rel="stylesheet" href="__PUBLIC__/css/articledetail2.css">
+</block>
+<block name="main">
+<!--place-->
+<ul class="wapper place mis-clearfix">
+    <li><a href="{:U('Index/index')}" target="_blank">首页</a></li>
+    <empty name="housedetail">
+    <li>></li>
+    <li><a href="{:U('Index/index')}" target="_blank">资讯</a></li>
+    <li>></li>
+    <li>{$detail.name}</li>
+    <else />
+    <li>></li>
+    <li><a href="{:U('House/detail',array('id'=>$housedetail['id']))}" target="_blank">{$housedetail.name}</a></li>
+    <li>></li>
+    <li>{$detail.name}</li>
+    </empty>
+</ul>
+
+<div class="wapper mis-clearfix">
+	<div class="fang-left left-side">
+    	<div class="details">
+    	    <div class="title">
+	           <h1>{$detail.name}</h1>
+	           <span class="date-time"><empty name="$detail.date_update">{$detail.date_joined}<else/>{$detail.date_update}</empty></span>
+        	</div>
+			{$detail.content}
+        </div>
+    </div>
+    
+   <div class="fang-left right-side">
+   		<empty name="housedetail">
+       		<div class="hot-dynamic">
+	           <h2>
+	           	<a href="#">
+	               	其他文章
+	               </a>
+	           </h2>
+	         	<table class="public-table table-border-bottom">
+	         		<ctm action="recommend" name="article" item="arc" limit="5">
+	         		<if condition="$arc['id'] eq $detail['id']"><php>continue;</php></if>
+	           	<tr>     
+	                   <td><span class="num-bg">{$key + 1 }</span></td>
+	                   <td>
+	                   	<a class="dynamic-info" href="{:U('Content/detail',array('logic'=>'article','id'=>$arc['id']))}" target="_blank">{$arc.name}</a>
+	                  </td>
+	              </tr>
+	              </ctm>
+	           </table>
+        	</div>
+       	<else/>       
+	       <div class="build-info">
+	           <h2>楼盘信息</h2>
+	           <table class="public-table table-border-bottom" border="0" cellpadding="0" cellspacing="0">  
+	               	<tr>
+	                       <td width="70">平均价格：</td>
+	                       <td><span style="font-size:24px;" class="red">{$housedetail.avgprice}</span>元/㎡</td>
+	                   </tr>
+	                   <tr>
+	                       <td width="70">开盘时间：</td>
+	                       <td>{$housedetail.date_start}</td>
+	                   </tr>
+	                   <tr>
+	                       <td width="70">楼盘位置：</td>
+	                       <td><span style=" display:inline-block; padding:5px 0; line-height:21px;">{$housedetail.address}</span></td>
+	                   </tr>
+	                   <tr>
+	                       <td width="70">主力户型：</td>
+	                       <td>{$housedetail.main_apartment}</td>
+	                   </tr>
+	                   <tr>
+	                       <td colspan="2">
+	                       	<a style="color:#3399ff;" href="{:U('House/detail',array('id'=>$housedetail['id']))}" target="_blank">更多{$housedetail.name}楼盘信息 >>
+	                           </a>
+	                       </td>
+	                   </tr>
+	               </table>
+	       	</div>
+	       	<empty name="other">
+		       	<div class="hot-dynamic">
+		           <h2>
+					其他楼盘相关动态
+		           </h2>
+		         	<table class="public-table table-border-bottom">
+		         		<hotctm name="article" item="arc" limit="5" secid="5">
+		           	<tr>     
+		                   <td><span class="num-bg">{$key + 1 }</span></td>
+		                   <td>
+		                   	<a class="dynamic-info" href="{:U('Article/detail',array('id'=>$arc['id']))}" target="_blank">{$arc.name}</a>
+		                  </td>
+		              </tr>
+		              </hotctm>
+		           </table>
+	        	</div>
+        	<else />
+        		<div class="hot-dynamic">
+		           <h2>
+					楼盘相关动态
+		           </h2>
+		         	<table class="public-table table-border-bottom">
+		         		<foreach name="other" item="ot">
+		         		<if condition="$ot['id'] eq $detail['id']"><php>continue;</php></if>
+		           	<tr>     
+		                   <td><span class="num-bg">{$key + 1 }</span></td>
+		                   <td>
+		                   	<a class="dynamic-info" href="{:U('Article/detail',array('id'=>$ot['id']))}" target="_blank">{$ot.name}</a>
+		                  </td>
+		              </tr>
+		              </foreach>
+		           </table>
+	        	</div>
+        	</empty>
+        </empty>
+        	         
+  	  </div>
+</div>
+
+</block>

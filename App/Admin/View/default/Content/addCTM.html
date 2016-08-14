@@ -1,0 +1,61 @@
+<extend name="Public:base" />
+<block name="main">
+	<!-- Page Heading -->
+	<div class="row">
+	    <div class="col-lg-12">
+			<ol class="breadcrumb">
+			    <li>
+			        <i class="fa fa-dashboard"></i>  <a href="{:U('Index/index')}">仪表盘</a>
+			    </li>
+			    <li>
+			        <i class="fa fa-edit"></i> <a href="{:U('Content/index')}">内容模型管理</a>
+			    </li>
+			     <li class="active">
+			        <i class="fa fa-edit"></i> 添加内容模型
+			    </li>
+			</ol>
+	    </div>
+	</div>
+	<!-- /.row -->
+	
+    <div class="row">
+    <div class="col-lg-12">
+       <form role="form" action="{:U('Admin/cud_proxy',array('model'=>'Content','action'=>'C'))}" method="post">
+	       <div class="form-group">
+               <label>内容模型名称</label>
+               <input class="form-control" type="text" placeholder="内容模型名称" name="name">
+           </div>
+           <div class="form-group">
+               <label>内容模型程序逻辑名称(实现CTM逻辑的文件,一般在项目文件下Logic文件夹中)</label>
+               <input class="form-control" type="text" placeholder="内容模型逻辑名称" name="logicname">
+           </div>
+	       <div class="form-group">
+               <label>内容模型描述</label>
+               <input class="form-control" type="text" placeholder="内容模型描述" name="description">
+           </div>
+           <div class="form-group">
+               <label>内容模型前台列表页</label>
+               <input class="form-control" type="text" placeholder="前台列表页模板" name="listtpl">
+           </div>
+           <div class="form-group">
+               <label>前台详情页模板</label>
+               <input class="form-control" type="text" placeholder="前台详情页模板" name="detailtpl">
+           </div>
+           <div class="form-group">
+               <label>后台列表页</label>
+               <input class="form-control" type="text" placeholder="后台列表页" name="alisttpl">
+           </div>
+           <div class="form-group">
+               <label>后台编辑页</label>
+               <input class="form-control" type="text" placeholder="后台编辑页" name="aedittpl">
+           </div>
+           <div class="form-group">
+               <label>后台添加页</label>
+               <input class="form-control" type="text" placeholder="后台添加页" name="aaddtpl">
+           </div>
+           <button type="submit" class="btn btn-primary" id="userbtn"> 提 交 </button>
+       </form>
+   </div>
+   </div>
+   <!-- /.row -->
+</block>

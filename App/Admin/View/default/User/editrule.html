@@ -1,0 +1,48 @@
+<extend name="Public:base" />
+<block name="main">
+	<!-- Page Heading -->
+	<div class="row">
+	    <div class="col-lg-12">
+			<ol class="breadcrumb">
+			    <li>
+			        <i class="fa fa-edit"></i> <a href="{:U('User/rulelist')}">规则管理</a>
+			    </li>
+			     <li class="active">
+			        <i class="fa fa-edit"></i> 编辑规则
+			    </li>
+			</ol>
+	    </div>
+	</div>
+	<!-- /.row -->
+	
+    <div class="row">
+    <div class="col-lg-6">
+       <form role="form" action="{:U('Admin/cud_proxy',array('model'=>'auth_rule','action'=>'U'))}" method="post">        
+	       <div class="form-group">
+	           <label>规则别名</label>
+	           <input class="form-control" type="text" placeholder="规则名称" name="title" value="{$rule.title}">	   
+	       </div>
+	       <div class="form-group">
+	           <label>规则逻辑名</label>
+	           <input class="form-control" type="text" placeholder="规则名称" name="name" value="{$rule.name}">	   
+	       </div>
+	       <div class="form-group">
+	           <label>规则条件(为空默认为存在就验证)</label>
+	           <input class="form-control" type="text" placeholder="规则名称" name="condition" value="{$rule.condition}">	   
+	       </div>
+           <div class="form-group">
+               <label>是否可用</label>
+               <label class="radio-inline">
+                   <input type="radio" name="status" value="1" <if condition="$rule['status'] eq 1">checked</if>>是
+               </label>
+               <label class="radio-inline">
+                   <input type="radio" name="status" value="0" <if condition="$rule['status'] eq 0">checked</if>>否
+               </label>
+           </div>
+           <input type="hidden" value="{$rule.id}" name="id" />
+           <button type="submit" class="btn btn-primary"> 提 交 </button>
+       </form>
+   </div>
+   </div>
+   <!-- /.row -->
+</block>

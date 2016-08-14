@@ -1,0 +1,52 @@
+<extend name="Public:base" />
+<block name="main">
+	<!-- Page Heading -->
+	<div class="row">
+	    <div class="col-lg-12">
+			<ol class="breadcrumb">
+			    <li>
+			        <i class="fa fa-edit"></i> <a href="{:U('Sections/index')}">栏目管理</a>
+			    </li>
+			     <li class="active">
+			        <i class="fa fa-edit"></i> 编辑栏目分类
+			    </li>
+			</ol>
+	    </div>
+	</div>
+	<!-- /.row -->
+	
+    <div class="row">
+    <div class="col-lg-6">
+       <form role="form" action="{:U('Admin/cud_proxy',array('model'=>'sections','action'=>'U'))}" method="post" id="userform">
+           <div class="form-group">
+	           <label>父级栏目</label>
+	           <select class="form-control" name="parent">
+	           	   <option value="0">顶级栏目</option>
+	           	   <foreach name="sectionList" item="vo">
+	               <option <if condition="$vo['id'] eq $secinfo['parent']"> selected = "selected"</if>value="{$vo.id}"><if condition="$vo['parent'] neq 0 ">|</if><?php echo str_repeat('_',$vo['level']*4); ?>{$vo.name}</option>
+	               </foreach>
+	           </select>
+	       </div>
+	       <div class="form-group">
+               <label>栏目名称</label>
+               <input class="form-control" type="text" placeholder="栏目名称" name="name" value="{$secinfo.name}">
+           </div>
+           <div class="form-group">
+               <label>排序(数字越小越靠前)</label>
+               <input class="form-control" type="text" placeholder="排序" name="sort" value="{$secinfo.sort}">
+           </div>
+           <div class="form-group">
+               <label>栏目URL(U函数参数)</label>
+               <input class="form-control" type="text" placeholder="URL" name="url" value="{$secinfo.url}">
+           </div>
+	       <div class="form-group">
+               <label>栏目描述</label>
+               <input class="form-control" type="text" placeholder="栏目描述" name="description" value="{$secinfo.description}">
+           </div>
+           <input type="hidden" name="id" value="{$secinfo.id}"/>
+           <button type="submit" class="btn btn-primary" id="userbtn"> 提 交 </button>
+       </form>
+   </div>
+   </div>
+   <!-- /.row -->
+</block>

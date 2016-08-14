@@ -1,0 +1,126 @@
+<extend name="Public:base" />
+<block name="head"><link rel="stylesheet" href="__PUBLIC__/css/index.css"></block>
+<block name="main">
+<!-- 幻灯片-->
+	<div id="myCarousel" class="carousel slide">
+	<p style="display:none;" id="myp" data-x1="0" data-x2="0"></p>
+		<ol class="carousel-indicators">
+			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			<li data-target="#myCarousel" data-slide-to="1"></li>
+			<li data-target="#myCarousel" data-slide-to="2"></li>
+		</ol>
+		<div class="carousel-inner">
+			<div class="item active">
+				<img src="__PUBLIC__/img/slide1.jpg" alt="海岛洗车">
+			</div>
+			<div class="item">
+				<img src="__PUBLIC__/img/slide2.jpg" alt="海岛洗车">
+			</div>
+			<div class="item">
+				<img src="__PUBLIC__/img/slide3.jpg" alt="海岛洗车">
+			</div>
+		</div>
+		<a href="#myCarousel" data-slide="prev" class="carousel-control left">
+			<span class="glyphicon glyphicon-chevron-left"></span>
+		</a>
+		<a href="#myCarousel" data-slide="next" class="carousel-control right">
+			<span class="glyphicon glyphicon-chevron-right"></span>
+		</a>
+		
+	</div>
+<!-- 幻灯片结束-->
+
+<!-- 主体开始 -->
+	<div class="theme container">
+		<ul class="row">
+			<li class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+				<a href="list.html">
+					<span class="glyphicon glyphicon-bed"></span>
+					<h5>预约洗车</h5>
+				</a>
+			</li>
+			<li class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+				<a href="list.html">
+					<span class="glyphicon glyphicon-heart"></span>
+					<h5>预约美容</h5>
+				</a>
+			</li>
+			<li class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+				<a href="rechargevip.html">
+					<span class="glyphicon glyphicon-repeat"></span>
+					<h5>包月洗车</h5>
+				</a>
+			</li>
+			<li class="col-lg-3 col-md-3 col-sm-3 col-xs-3"> 
+				<a href="list.html">
+					<span class="glyphicon glyphicon-fire"></span>
+					<h5>到店服务</h5>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div class="activity container">
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 actone active">
+			<a href="rechargevip.html">
+	 			<div class="left">
+	 				<img src="__PUBLIC__/img/vip.png" alt="">
+	   				<!-- <span class="glyphicon glyphicon-yen"></span> -->
+	 			</div>
+	 			<div class="body">
+	   				<h5>会员充值</h5>
+	   				<p>高性价比洗车方案</p>
+	 			</div>
+	 		</a>
+ 		</div>
+
+ 		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 acttwo active">
+ 			<a href="activity.html">
+	 			<div class="left">
+	   				<span class="glyphicon glyphicon-fire"></span>
+	 			</div>
+	 			<div class="body">
+	   				<h5>热门活动</h5>
+	   				<p>满满的全是福利</p>
+	 			</div>
+ 			</a>
+ 		</div>
+	</div>
+	<div class="map">
+
+	</div>
+<!-- 主体结束 -->
+</block>
+<block name="js">
+<script type="text/javascript">
+	$(function () {
+		//轮播自动播放
+		$('#myCarousel').carousel({
+			//自动4秒播放
+			interval : 4000,
+		});	
+		
+		$('.item img').on(
+			'touchstart',function(e){
+				var _touch = e.originalEvent.targetTouches[0];
+				$('#myp').attr('data-x1', _touch.pageX);
+			});
+		$('.item img').on('touchend',function(e){
+				var _touch = e.originalEvent.changedTouches[0];
+				$('#myp').attr('data-x2', _touch.pageX);
+				moveImg();
+			});
+			
+		function moveImg(){
+			var x1 = parseFloat( $('#myp').attr('data-x1'));
+			var x2 = parseFloat( $('#myp').attr('data-x2'));
+			if( x1 > x2) {
+				$('#myCarousel .right').trigger('click');
+			} 
+			if( x1 < x2){
+				$('#myCarousel .left').trigger('click');
+			}
+		}		
+
+	});
+</script>
+</block>

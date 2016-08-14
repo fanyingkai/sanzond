@@ -1,0 +1,142 @@
+<extend name="Public:base" />
+<block name="title">{$config.webname}-资讯</block>
+<block name="head">
+<link href="__PUBLIC__/css/reset.css" rel="stylesheet"/>
+<link href="__PUBLIC__/css/main.css" rel="stylesheet"/>
+</block>
+<block name="main">
+<div class="content">
+	<div class="wrap">
+		<div class="pad20">
+			<div class="zysz">
+				<div class="title">
+					<div class="name name_zy"><h3>本站推荐</h3>Recommended</div>
+					<!-- <div class="more"><a href="#">更多 ></a></div>  -->
+				</div>
+				<div class="con">
+					<foreach name="rehouse" item="reh">
+					<if condition="$key neq 2">
+					<div class="zy_one">
+						<a href="{:U('House/detail',array('id'=>$reh['id']))}"><img src="/Uploads/{$reh.main_img}" style="width:256px;height:255px;"/></a>
+						<div class="zy_nme"><a href="{:U('House/detail',array('id'=>$reh['id']))}">{$reh.name}</a></div>
+						<ul class="kc_list">
+							<foreach name="reart" item="art">
+							<if condition="$art['housename'] eq $reh['name']">
+							<li>
+								<div class="time">{$art.date_joined|substr=0,11}</div>
+								<span style="background:#ff5402;">荐</span>
+								<a href="{:U('Article/detail',array('id'=>$art['id']))}"><b>{$art.name}</b></a>
+							</li>
+							</if>
+							</foreach>
+						</ul>
+					</div>
+					<else/>
+					<div class="zy_one mr0">
+						<a href="{:U('House/detail',array('id'=>$reh['id']))}"><img src="/Uploads/{$reh.main_img}" style="width:256px;height:255px;"/></a>
+						<div class="zy_nme"><a href="{:U('House/detail',array('id'=>$reh['id']))}">{$reh.name}</a></div>
+						<ul class="kc_list">
+							<foreach name="reart" item="art">
+							<if condition="$art['housename'] eq $reh['name']">
+							<li>
+								<div class="time">{$art.date_joined|substr=0,11}</div>
+								<span style="background:#ff5402;">荐</span>
+								<a href="{:U('Article/detail',array('id'=>$art['id']))}"><b>{$art.name}</b></a>
+							</li>
+							</if>
+							</foreach>
+						</ul>
+					</div>
+					</if>
+					</foreach>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="v_right">
+				<div class="mrt20">
+					<div class="cjwt_tit">推荐楼盘动态</div>
+					<ul class="cjwt_list">
+					<foreach name="redynamic" item="red">
+						<li>
+							<a href="{:U('Article/detail',array('id'=>$red['id']))}">
+							<div class="pic"><img src="/Uploads/{$red.thumbnails}" style="width:60px;height:50px;"/></div>
+							<div class="txt">{$red.name}</div>
+							</a>
+						</li>
+						</foreach>
+					</ul>
+				</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="pad20">
+			<div class="title">
+				<div class="name name2"><h3>动态消息</h3>News Feed</div>
+				<!-- <div class="more"><a href="#">更多 ></a></div> -->
+			</div>
+			<div class="f4_x"></div>
+			<div class="wwdt">
+				<ctm action="recommend" name="article" item="new" limit="1" secid="6"> 
+				<div class="l_pic">
+					<a href="{:U('Article/detail',array('id'=>$new['id']))}">
+					<img src="/Uploads/{$new.thumbnails}" style="width:286px;height:192px"/>
+					</a>
+					<a href="{:U('Article/detail',array('id'=>$new['id']))}">{$new.name}</a>
+				</div>
+				</ctm>
+				<div class="c_news">
+					<ctm action="recommend" name="article" item="rea" limit="4" secid="8">
+					<if condition="$key eq 0">
+					<div class="news_first"><h4>{$rea.name}</h4>{$rea.description|substr=0,166}...<a href="{:U('Article/detail',array('id'=>$rea['id']))}">[详细]</a>
+					</div>
+					</if>
+					<if condition="$key eq 1">
+					<div class="news_sj">
+						<ul>
+					</if>
+						<li><a href="{:U('Article/detail',array('id'=>$rea['id']))}"><span>{$rea.date_joined|substr=0,11}</span>{$rea.name}</a></li>
+					</ctm>
+					</ul>
+					</div>
+					
+					<!--<a href="#" class="more">更多市场动态</a>  -->
+				</div>
+				<div class="r_tw">
+					<ul class="r_tw_list">
+						<ctm action="recommend" name="article" item="rei" limit="2" secid="7">
+						<li>
+							<div class="pic"><a href="{:U('Article',array('id'=>$rei['id']))}"><img src="/Uploads/{$rei['thumbnails']}" style="width:120px;height:78px;"/></a></div>
+							<div class="txt"><a href="{:U('Article',array('id'=>$rei['id']))}">{$rei.name}</a><span>{$rei.date_joined|substr=0,11}</span></div>
+						</li>
+						</ctm>
+					</ul>
+					<!--<a href="#" class="more">更多土地动态</a>  -->
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="pad20 slideGroup">
+			<div class="title">
+				<div class="name name2"><h3>本地新闻</h3>Local news</div>
+				<!--<div class="more"><a href="#">更多 ></a></div>-->
+				<div class="clear"></div>
+			</div>
+			<div class="parBd">
+				<div class="slideBox">
+					<a class="sPrev" href="javascript:void(0)"></a>
+					<ul>
+						<ctm action="recommend" name="article" item="lnew" limit="15" secid="3">
+						<li>
+							<div class="pic"><a href="{:U('Article/detail',array('id'=>$lnew['id']))}" target="_blank"><img src="/Uploads/{$lnew.thumbnails}" /></a></div>
+							<div class="tit"><a href="{:U('Article/detail',array('id'=>$lnew['id']))}" target="_blank">{$lnew.name}</a><span class="eye">{$lnew.date_joined|substr=0,11}</span></div>
+						</li>
+						</ctm>
+					</ul>
+					<a class="sNext" href="javascript:void(0)"></a>
+				</div><!-- slideBox End -->
+			</div><!-- parBd End -->
+		</div>
+	
+	</div>
+</div>
+</block>

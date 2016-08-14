@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+#emptydiv {
+	margin:0 auto;
+	text-align: center;
+	padding-top:10%;
+}
+
+#emptydiv span {
+	font-size: 1000%;
+	color: #ccc;
+}
+
+#emptydiv h4 {
+	margin:0;
+	color: #666;
+	padding-bottom:20px;
+}
+
+#emptydiv button{
+	background:#ccc;
+}

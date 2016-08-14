@@ -1,0 +1,60 @@
+<extend name="Public:base" />
+<block name="main">
+	<!-- Page Heading -->
+	<div class="row">
+	    <div class="col-lg-12">
+			<ol class="breadcrumb">
+			    <li>
+			        <i class="fa fa-dashboard"></i>  <a href="{:U('Index/index')}">仪表盘</a>
+			    </li>
+			    <li>
+			        <i class="fa fa-edit"></i> <a href="{:U('User/index')}">用户管理</a>
+			    </li>
+			</ol>
+	    </div>
+	</div>
+	<!-- /.row -->
+    
+	<div class="row">
+		  <div class="col-lg-12">
+	        <ol class="breadcrumb">
+	            <li>
+	                <a href="{:U('User/addgroup')}"><i class="glyphicon glyphicon-plus"></i>添 加 用 户 分 类</a>
+	            </li>
+	        </ol>
+	      </div>
+		  <div class="col-lg-12">
+		      <h2>{$typename}</h2>
+		      <div class="table-responsive">
+		          <table class="table table-bordered table-hover table-striped">
+		              <thead>
+		                  <tr>
+		                  	  <th>序号</th>
+		                  	  <th>分类名称</th>
+		                      <th>分类绑定规则</th>
+		                      <th>是否可用</th>
+		                      <th>操作</th>
+		                  </tr>
+		              </thead>
+		              <tbody>
+		                 <foreach name="grouplist" item="vo">
+		                  <tr <if condition="$vo['status'] != 1 ">class="danger"</if>>
+		                      <td>{$key + 1 }</td>
+		                      <td>{$vo.title}</td>
+		                      <td>{$vo.rules}</td>
+		                      <td><if condition="$vo['status'] == 1 ">是
+		                      		<else /> 否
+		                      	  </if>
+		                      </td>
+		                      <td>
+		                      <a href="{:U('User/editgroup',array('id'=>$vo['id']))}"><span>编辑</span></a> | 
+		                      <span>删除 </span>
+		                      </td>
+		                  </tr>
+		                 </foreach>
+		              </tbody>
+		          </table>
+		      </div>
+		  </div>
+	</div>
+</block>

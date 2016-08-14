@@ -1,0 +1,127 @@
+<extend name="Public:base" />
+<block name="main">
+<div class="container-fluid">
+	<!-- Page Heading -->
+	<div class="row">
+	    <div class="col-lg-12">
+	        <ol class="breadcrumb">
+	            <li class="active">
+	                <i class="fa fa-dashboard"></i> 回收站
+	            </li>
+	        </ol>
+	    </div>
+	</div>
+	<!-- /.row -->
+	<div class="row">
+		<form role="form" action="{:U('Trash/index')}" method="post">
+		 	<div class="form-inline col-xs-4">
+		        <label>内容模型分类：</label>
+		        <select class="form-control" name="type">
+		            <option value='0'> 全 部 </option>
+					<foreach name="content" item="vo">
+	               	<option value="{$vo.id}">{$vo.name}</option>
+	               	</foreach>
+		        </select>
+		    </div>
+	        <div class="col-xs-2">
+	         <button type="submit" class="btn btn-primary">查 询</button>
+	        </div>
+	    </form>
+    </div>
+    <div class="page-header"></div>
+	    
+   	<div class="row">
+	  <div class="col-lg-12">
+	      <div class="table-responsive">
+	          <table class="table table-bordered table-hover table-striped">
+	              <thead>
+	                  <tr>
+	                  	  <th>序号</th>
+	                      <th>内容ID</th>
+	                      <th>所属内容模型</th>
+	                      <th>内容简情</th>
+	                      <th>删除者</th>
+	                      <th>操作</th>
+	                      <th>删除时间</th>
+	                  </tr>
+	              </thead>
+	              <tbody>
+	                 <foreach name="trash" item="vo">
+	                  <tr>
+	                      <td>{$key + 1 }</td>
+	                      <td>{$vo.id}</td>
+	                      <td>{$vo.ctmname}</td>
+	                      <td>{$vo.name}</td>
+	                      <td>{$vo.updater}</td>
+	                      <td>
+	                      <a href="javascript:revert('{$vo.ctmname}','{$vo.id}');"><span>还原</span></a>
+	                      <a href="javascript:destroy('{$vo.ctmname}','{$vo.id}');">销毁</a>
+	                      </td>
+	                      <td>{$vo.date_update}</td>
+	                  </tr>
+	                 </foreach>
+	              </tbody>
+	          </table>
+	          {$page}
+	      </div>
+	  </div>
+	</div>
+	
+</div>
+</block>
+<block name="js">
+<script>
+function revert(logic,id) {
+	if(confirm('是否还原该内容？')) {
+		$.ajax({
+			type:"post",
+			url:"{:U('Trash/revert')}",
+			dataType:"json",
+			data:{'ctmname':logic,'id':id},
+			error:function() {
+				alert('无权限操作');
+			},
+			success:function(data) {
+				if(data.status == '1') {
+					if(confirm('还原成功')) {
+						window.location.reload();
+					} else {
+						window.location.reload();
+					}
+				} else {
+					alert(data.info);
+				}
+			}
+		});
+	} else {
+		return;
+	}
+}
+function destroy(logic,id) {
+	if(confirm('是否彻底删除销毁该内容？')) {
+		$.ajax({
+			type:"post",
+			url:"{:U('Trash/destroy')}",
+			dataType:"json",
+			data:{'ctmname':logic,'id':id},
+			error:function() {
+				alert('无权限操作');
+			},
+			success:function(data) {
+				if(data.status == '1') {
+					if(confirm('销毁成功')) {
+						window.location.reload();
+					} else {
+						window.location.reload();
+					}
+				} else {
+					alert(data.info);
+				}
+			}
+		})
+	} else {
+		return;
+	}
+}
+</script>
+</block>

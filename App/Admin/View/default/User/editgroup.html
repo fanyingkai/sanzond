@@ -1,0 +1,50 @@
+<extend name="Public:base" />
+<block name="main">
+	<!-- Page Heading -->
+	<div class="row">
+	    <div class="col-lg-12">
+			<ol class="breadcrumb">
+			    <li>
+			        <i class="fa fa-edit"></i> <a href="{:U('User/grouplist')}">用户分类管理</a>
+			    </li>
+			     <li class="active">
+			        <i class="fa fa-edit"></i> 编辑分类权限
+			    </li>
+			</ol>
+	    </div>
+	</div>
+	<!-- /.row -->
+	
+    <div class="row">
+    <div class="col-lg-6">
+       <form role="form" action="{:U('User/savegroup')}" method="post">        
+           <div class="form-group">
+	           <label>分类名称</label>
+	           <input class="form-control" type="text" placeholder="分类名称" name="title" value="{$ginfo.title}">	   
+	       </div>
+           <div class="form-group">
+                <label>是否可用</label>
+                <label class="radio-inline">
+                    <input type="radio" name="status" value="1" <if condition="$ginfo['status'] eq 1">checked</if>>是
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="status" value="0" <if condition="$ginfo['status'] eq 0">checked</if>>否
+                </label>
+            </div>
+            <div class="form-group">
+                 <label>权限列表</label>
+                 <foreach name="rule" item="ru">
+                 <div class="checkbox">
+                     <label>
+                         <input type="checkbox" value="{$ru.id}" name="rule[]" <?php $rules=explode(',',$ginfo['rules']);$var="";foreach($rules as $k=>$v){if($v==$ru['id']){ $var="checked='checked'";break;}} echo $var; ?>>{$ru.title}
+                     </label>
+				 </div>
+				 </foreach>
+			</divf>
+            <input name="id" value="{$ginfo.id}" type="hidden" />
+           <button type="submit" class="btn btn-primary"> 提 交 </button>
+       </form>
+   </div>
+   </div>
+   <!-- /.row -->
+</block>
