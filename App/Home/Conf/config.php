@@ -18,7 +18,7 @@ return array(
     //主题配置
     'DEFAULT_THEME' => 'default',
     'TMPL_PARSE_STRING'  =>array(
-        '__PUBLIC__' => '/Public/Static/Carwash/'.DEFAULT_THEM, // 更改默认的/Public 替换规则
+        '__PUBLIC__' => '/Public/Static/Home/', // 更改默认的/Public 替换规则
         //'__JS__'     => '/Public/JS/', // 增加新的JS类库路径替换规则
         //'__UPLOAD__' => '/Uploads', // 增加新的上传路径替换规则 
     ),

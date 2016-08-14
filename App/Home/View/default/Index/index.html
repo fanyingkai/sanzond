@@ -20,22 +20,22 @@
 	  <ul>
 		 <li>
 		    <a href="" target="_blank">
-		    	<img src="img/y1.jpg" alt="">
+		    	<img src="__PUBLIC__/img/y1.jpg" alt="">
 		    </a>
 	    </li>
 	    <li>
 		    <a href="" target="_blank">
-		    	<img src="img/amxl.jpg" alt="">
+		    	<img src="__PUBLIC__/img/amxl.jpg" alt="">
 		    </a>
 	    </li>
 	    <li>
 		    <a href="" target="_blank">
-		    	<img src="img/y2.jpg" alt="">
+		    	<img src="__PUBLIC__/img/y2.jpg" alt="">
 		    </a>
 	    </li>
 	    <li>
 		    <a href="" target="_blank">
-		    	<img src="img/aspl.jpg" alt="">
+		    	<img src="__PUBLIC__/img/aspl.jpg" alt="">
 		    </a>
 	    </li>   
 		
@@ -47,25 +47,20 @@
 	<h4 class="title">档次分类</h4>
 	<div class="main">
 		<ul class="type">
-			<li>
-				<a href="list.html">业务员</a>
+			<foreach name="category" item="vo">
+			<if condition="$key gt 5">
+			<li style="display:none">
+				<a href="{:U('Goods/getcategorygoods',array('category'=>urlencode($vo['dmmc'])))}">{$vo.dmmc}</a>
 			</li>
+			<else />
 			<li>
-				<a href="list.html">新品</a>
+				<a href="{:U('Goods/getcategorygoods',array('category'=>urlencode($vo['dmmc'])))}">{$vo.dmmc}</a>
 			</li>
+			</if>
+			
+			</foreach>
 			<li>
-				<a href="list.html">品牌</a>
-			</li>
-		</ul>
-		<ul class="type">
-			<li>
-				<a href="list.html">医院品种</a>
-			</li>
-			<li>
-				<a href="list.html">特殊品种</a>
-			</li>
-			<li>
-				<a href="list.html">更多</a>
+				<a href="#">更多</a>
 			</li>
 		</ul>
 	</div>
@@ -79,7 +74,7 @@
 			</div>
 			<div class="right">
 				<div class="img">
-				<img src="img/amxl.jpg" alt="">
+				<img src="__PUBLIC__/img/amxl.jpg" alt="">
 			</div>
 			</div>
 		</li>
@@ -90,7 +85,7 @@
 			</div>
 			<div class="right">
 			<div class="img">
-				<img src="img/amxl.jpg" alt="">
+				<img src="__PUBLIC__/img/amxl.jpg" alt="">
 			</div>
 				
 			</div>
@@ -104,7 +99,7 @@
 			</div>
 			<div class="right">
 				<div class="img">
-				<img src="img/amxl.jpg" alt="">
+				<img src="__PUBLIC__/img/amxl.jpg" alt="">
 			</div>
 			</div>
 		</li>
@@ -115,7 +110,7 @@
 			</div>
 			<div class="right">
 			<div class="img">
-				<img src="img/amxl.jpg" alt="">
+				<img src="__PUBLIC__/img/amxl.jpg" alt="">
 			</div>
 				
 			</div>
@@ -123,45 +118,8 @@
 	</ul>	
 <!-- 主体结束 -->
 </block>
-
-<!-- 底部开始 -->
-<block name="footer">
-	<ul>
-		<li>
-			<a href="index.html">
-				<p class="iconfont">&#xe609;</p>
-				<p>首页</p>
-			</a>
-		</li>
-		<li>
-			<a href="list.html">
-				<p class="iconfont">&#xe623;</p>
-				<p>订药</p>
-			</a>
-		</li>
-		<li>
-			<a href="cart.html">
-				<p class="iconfont">&#xe643;</p>
-				<p>购物车</p>
-			</a>
-		</li>
-		<li>
-			<a href="order.html">
-				<p class="iconfont">&#xe636;</p>
-				<p>订单</p>
-			</a>
-		</li>
-		<li>
-			<a href="stores.html">
-				<p class="iconfont">&#xe62f;</p>
-				<p>门店</p>
-			</a>
-		</li>
-	</ul>
-</block>
-<!-- 底部结束 -->
 <block name="js">
-<script type="text/javascript" src="js/yxMobileSlider.js"></script>
+<script type="text/javascript" src="/Public/Static/Public/js/yxMobileSlider.js"></script>
 <script>
     $(".slider").yxMobileSlider({width:640,height:320,during:3000});
 </script>
