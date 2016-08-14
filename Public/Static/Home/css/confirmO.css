@@ -1,0 +1,141 @@
+@charset "UTF-8";
+
+.Hspacerlayer {
+	height: 50px;
+}
+body {
+	background: #eee;
+}
+
+.main .peopleinfo {
+	padding:10px;
+	background: #fff;
+
+
+}
+
+.main h4 {
+	color: #444;
+	font-size: 16px;
+	line-height: 40px;
+	margin-left:10px;
+	font-weight: 400;
+}
+
+
+
+.main .peopleinfo .group {
+	width:100%;
+	height: 54px;
+	padding:10px 0 0 0;
+}
+
+.main .peopleinfo .group input {
+	margin:0 auto;
+	float: left;
+	display: inline-block;
+	border:1px solid #ccc;
+	width:80%;
+	height: 40px;
+	font-size: 16px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+.main .peopleinfo .group button {
+	padding:0;
+	background: #eee;
+	width:60px;
+	text-align: center;
+	font-size: 12px;
+	height: 44px;
+	color: #444;
+	margin-left: -1px;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border:1px solid #ccc;
+}
+
+.main .span {
+	padding:0 20px 0 10px;
+	line-height: 40px;
+}
+
+.main .span .edit {
+	display: inline-block;
+	margin:0;
+	float: right;
+	font-size: 15px;
+}
+
+.main .span .edit .iconfont {
+	margin-right: 3px;
+}
+
+.main .goodsinfo {
+	clear: both;
+	background: #fff;
+	padding-left:10px;
+	font-size: 15px;
+}
+
+.main .goodsinfo ul li {
+	line-height: 35px;
+}
+
+.main .goodsinfo ul li .name {
+	margin-right: 20px;
+}
+.main .goodsinfo ul li .price {
+	
+	color: #cd0000;
+}
+
+.main .goodsinfo ul li .addsub {
+	float: right;
+	margin-right:20px;
+}
+
+
+.main .goodsinfo ul li .addsub button {
+	display: inline-block;
+	padding:0;
+	margin:0;
+	border:1px solid #ccc;
+	width: 30px;
+	height: 28px;
+}
+.main .goodsinfo ul li .addsub input{
+	z-index: -1;
+	width: 40px;
+	height: 24px;
+	border: none;
+	border-top:1px solid #ccc;
+	border-bottom:1px solid #ccc;
+	margin:-4px;
+	text-align: center;
+}
+
+.main .goodsinfo ul li .addsub .sub {
+	border-top-left-radius:5px;
+	border-bottom-left-radius:5px;
+
+}
+
+.main .goodsinfo ul li .addsub .add {
+	border-top-right-radius:5px;
+	border-bottom-right-radius:5px;
+}
+
+
+
+footer button {
+	margin:5px auto;
+	width: 80%;
+	height: 40px;
+	border-radius: 5px;
+	border:1px solid #ccc;
+	background: rgb(109,203,239);
+	color: #fff;
+	font-size: 16px;
+}

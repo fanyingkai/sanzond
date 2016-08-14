@@ -1,21 +1,32 @@
-<extend name="Public:base" />
-<block name="head">
-	<link rel="stylesheet" href="__PUBLIC__/css/styles.css">
-	<link rel="stylesheet" href="__PUBLIC__/css/index.css">
-</block>
-<!-- 头部 -->
-<block name="header">
-	<nav>
-		<div class="search">
-		<input type="text" placeholder="输入搜索内容"/>
-		<span class="iconfont">&#xe638;</span>
-		</div>
-		<span class="phone iconfont">&#xe61f;</span>
-	</nav>
-</block>
-<!-- 头部结束 -->
-<block name="main">
-<!-- 幻灯片-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>太阳升订单系统</title>
+	<link rel="stylesheet" href="css/styles.css" type="text/css">
+	<link rel="stylesheet" href="css/font.css" type="text/css">
+	<link rel="stylesheet" href="css/common.css" type="text/css">
+	<link rel="stylesheet" href="css/index.css" type="text/css">
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+</head>
+<body>
+	<!--头部-->
+	<header>
+		<nav>
+			<a class="return" href="javascript:history.back()">
+				<span class="iconfont">&#xe611;</span>	
+			</a>
+			<div class="search">
+			<input type="text" placeholder="输入搜索内容"/>
+			<span class="iconfont">&#xe638;</span>
+			</div>
+			<span class="phone iconfont">&#xe61f;</span>
+		</nav>
+	</header>
+	<div class="Hspacerlayer"></div>
+
+	
 	<div class="slider">
 	  <ul>
 		 <li>
@@ -41,9 +52,10 @@
 		
 	  </ul>
 	</div>
-<!-- 幻灯片结束-->
+	
+	<!-- 头部结束-->
 
-<!-- 主体开始 -->
+	<!-- 主体开始 -->
 	<h4 class="title">档次分类</h4>
 	<div class="main">
 		<ul class="type">
@@ -120,49 +132,51 @@
 				
 			</div>
 		</li>
-	</ul>	
-<!-- 主体结束 -->
-</block>
-
-<!-- 底部开始 -->
-<block name="footer">
-	<ul>
-		<li>
-			<a href="index.html">
-				<p class="iconfont">&#xe609;</p>
-				<p>首页</p>
-			</a>
-		</li>
-		<li>
-			<a href="list.html">
-				<p class="iconfont">&#xe623;</p>
-				<p>订药</p>
-			</a>
-		</li>
-		<li>
-			<a href="cart.html">
-				<p class="iconfont">&#xe643;</p>
-				<p>购物车</p>
-			</a>
-		</li>
-		<li>
-			<a href="order.html">
-				<p class="iconfont">&#xe636;</p>
-				<p>订单</p>
-			</a>
-		</li>
-		<li>
-			<a href="stores.html">
-				<p class="iconfont">&#xe62f;</p>
-				<p>门店</p>
-			</a>
-		</li>
 	</ul>
-</block>
-<!-- 底部结束 -->
-<block name="js">
-<script type="text/javascript" src="js/yxMobileSlider.js"></script>
-<script>
+	
+	<!-- 主体结束 -->
+
+	<!-- 底部开始 -->
+	<div class="Fspacerlayer"></div>
+	<footer>
+		<ul>
+			<li>
+				<a href="index.html">
+					<p class="iconfont">&#xe609;</p>
+					<p>首页</p>
+				</a>
+			</li>
+			<li>
+				<a href="list.html">
+					<p class="iconfont">&#xe623;</p>
+					<p>订药</p>
+				</a>
+			</li>
+			<li>
+				<a href="cart.html">
+					<p class="iconfont">&#xe643;</p>
+					<p>购物车</p>
+				</a>
+			</li>
+			<li>
+				<a href="order.html">
+					<p class="iconfont">&#xe636;</p>
+					<p>订单</p>
+				</a>
+			</li>
+			<li>
+				<a href="stores.html">
+					<p class="iconfont">&#xe62f;</p>
+					<p>门店</p>
+				</a>
+			</li>
+		</ul>
+	</footer>
+	<!-- 底部结束 -->
+
+</body>
+ <script type="text/javascript" src="js/yxMobileSlider.js"></script>
+ <script>
     $(".slider").yxMobileSlider({width:640,height:320,during:3000});
-</script>
-</block>
+ </script>
+</html>

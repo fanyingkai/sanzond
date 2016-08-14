@@ -3,72 +3,30 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
-	<title>海岛洗车</title>
-	<link rel="stylesheet" href="/Public/tipplug/bootstrap/css/bootstrap.min.css">
+	<title>太阳升订药系统</title>
 	<link rel="stylesheet" href="__PUBLIC__/css/common.css">
+	<link rel="stylesheet" href="/Public/Static/Public/css/font.css" type="text/css">
+	<link rel="stylesheet" href="/Public/Static/Public/css/smallred.css" type="text/css">
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 	<block name="head"></block>
-	
 </head>
 <body>
 
 <!-- 顶部-->
-	<nav id="top" class="navbar navbar-default navbar-fixed-top">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 left" >
-					<span class="glyphicon glyphicon-map-marker"></span><span>三亚市</span>
-				</div>
-				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 center">
-					<h3>海岛洗车</h3>
-				</div>
-				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 right">					
-				</div>		
-			</div>
-		</div>
-	</nav>
-	<div class="spacerlayer"></div>
+	<header>
+		<block name="header"></block>
+	</header>
+	<div class="Hspacerlayer"></div>
 <!-- 顶部结束-->
-<block name="main"></block>
-
-<!-- 底部 -->
-	<div class="spacerlayer"></div>
-	<nav class="navbar navbar-default navbar-fixed-bottom" id="bottom">
-		<div class="container">
-			<ul class="row">
-				<li class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bottom" id="1">
-					<a href="/" class="active">
-						<span class="glyphicon glyphicon-home"></span>
-						<h5>首页</h5>
-					</a>			
-				</li>
-
-				<li class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bottom" id="2">
-					<a href="{:U('Cws/lst')}">
-						<span class="glyphicon glyphicon-flash"></span>
-						<h5>闪电预约</h5>
-					</a>			
-				</li>
-
-				<li class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bottom" id="3">
-					<a href="{:U('Order/orderlist')}">
-						<span class="glyphicon glyphicon-list-alt"></span>
-						<h5>订单</h5>
-					</a>			
-				</li>
-
-				<li class="col-lg-3 col-md-3 col-sm-3 col-xs-3 bottom" id="4">
-					<a href="my.html">
-						<span class="glyphicon glyphicon-user"></span>
-						<h5>我的</h5>
-					</a>			
-				</li>
-			</div>	
-		</div>
-	</nav>
+	<block name="main"></block>
+<!-- 底部开始 -->
+	<div class="Fspacerlayer"></div>
+	<footer>
+		<block name="footer"></block>
+	</footer>
 <!-- 底部结束 -->
+
 </body>
-<script src="/Public/tipplug/jquery/jquery.min.js"></script>
-<script src="/Public/tipplug/bootstrap/js/bootstrap.min.js"></script>
 <block name="js">
 </block>
 </html>

@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+body {
+	background: #eee;
+}
+
+
+header ul {
+	clear: both;
+	width: 100%;
+	border-bottom: 1px solid #ccc;
+}
+
+header ul li {
+	display: inline-block;
+	width: 32%;
+	line-height: 40px;
+	text-align: center;
+
+}
+
+header ul .left {
+	border-bottom: 1px solid rgb(109,203,239);
+}
+
+.Hspacerlayer {
+	height: 91px;
+}
+
+.main ul li {
+	background: #fff;
+	padding:10px 10px 10px 20px;
+	color: #444;
+	font-size: 14px;
+	margin-bottom:10px;
+}
+
+.main ul li p {
+	margin:0;
+	line-height: 30px;
+}
+.main ul li p .right {
+	margin-left: 15px;
+}
+
+.main ul li .num span {
+	margin-left: 28px;
+}
+
+.main ul li .money span{
+	color: #cd0000;
+}
+
+.main ul li .time .fright {
+	float: right;
+	margin-right: 5px;
+}
+.main ul li .time .iconfont {
+	float: right;
+}

@@ -1,0 +1,103 @@
+@charset "UTF-8";
+
+
+.main ul li {
+	
+	width: 100%;
+	border-bottom:1px solid #ccc;
+	
+}
+
+.main ul li .img{
+	display: inline-block;
+	width: 25%;
+	padding:5px;
+	
+	
+}
+
+.main ul li .img img {
+	width:100%;
+	max-width: 200px;
+}
+
+.main ul li .info {
+	margin-top:10px;
+	display: inline-block;
+	width:70%;
+	float: right;
+	font-size: 14px;
+}
+
+.main ul li .info p {
+	margin:0 0 8px 0;
+	line-height: 20px;
+}
+
+.main ul li .info .addsub {
+	margin-top: 10px;
+}
+
+.main ul li .info .money {
+	display: inline-block;
+	color:#cd0000;
+	margin-right:10px;
+}
+
+.main ul li .info .num {
+	color:#888;
+}
+
+.main ul li .info .addsub button {
+	display: inline-block;
+	padding:0;
+	margin:0;
+	border:1px solid #ccc;
+	width: 30px;
+	height: 28px;
+}
+
+.main ul li .info .addsub .sub {
+	border-top-left-radius:5px;
+	border-bottom-left-radius:5px;
+
+}
+
+.main ul li .info .addsub .add {
+	border-top-right-radius:5px;
+	border-bottom-right-radius:5px;
+}
+
+.main ul li .info .addsub input {
+	width: 40px;
+	height: 24px;
+	border: none;
+	border-top:1px solid #ccc;
+	border-bottom:1px solid #ccc;
+	margin:-4px;
+	text-align: center;
+}
+
+footer {
+	line-height: 50px;
+	margin:0;
+	padding:0;
+}
+
+footer .left {
+	display: inline-block;
+	float: left;
+	width: 70%;
+	
+}
+
+footer .right {
+	display: inline-block;
+	background: rgb(109,203,239);
+	width: 30%;
+}
+
+footer .left .money {
+	margin:0 10px;
+}
+
