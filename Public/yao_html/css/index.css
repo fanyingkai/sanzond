@@ -1,0 +1,93 @@
+@charset "UTF-8";
+body {
+	background: #eee;
+	text-align: left;
+}
+
+.main {
+	padding:20px 10px 10px 10px;
+	background: #fff;
+	border-bottom:1px solid #ccc;
+}
+
+
+.main ul {
+	width: 100%;
+	text-align: center;
+
+}
+
+.main .type li {
+	display: inline-block;
+	/* box-sizing: border-box; */
+	width:32%;
+	margin-bottom: 20px;
+}
+
+.main .type li a {
+	display: block;
+	margin:0 auto;
+	line-height: 50px;
+	width: 80%;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+	box-shadow: 0px 0px 3px #ccc;
+	font-size: 15px;
+	color: #666;
+}
+
+
+.title{
+	padding:10px;
+	font-size: 15px;
+	color: #555;
+	border-bottom:1px solid #ccc;
+
+}
+
+
+.new {
+	width: 100%;
+	background: #fff;
+	border-bottom:1px solid #ccc;
+
+}
+
+.new li {
+	padding-top: 10px;
+	display: inline-block;
+	width: 49%;
+}
+
+.new .rightli {
+	border-left:1px solid #ccc;
+	
+}
+
+.new li .left {
+	display: inline-block;
+	width: 50%;
+	float: left;
+}
+
+.new li .left p {
+	line-height: 20px;
+	margin-left: 10px;
+	color: #444;
+}
+.new li .right {
+	display: inline-block;
+	width: 50%;
+}
+
+.new li .img {
+	display: inline-block;
+	width:100%;
+}
+
+.new li div .img img {
+	display: inline-block;
+	width:100%;
+}
+
+

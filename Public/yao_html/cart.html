@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>太阳升订单系统</title>
+	<link rel="stylesheet" href="css/font.css">
+	<link rel="stylesheet" href="css/common.css">
+	<link rel="stylesheet" href="css/cart.css">
+	<link rel="stylesheet" href="css/smallred.css">
+	<script src="js/jquery.min.js"></script>
+</head>
+<body>
+	<!--头部-->
+	<header>
+		<nav>
+			<a class="return" href="javascript:history.back()">
+				<span class="iconfont">&#xe611;</span>	
+			</a>
+			<div class="search">
+			<input type="text" placeholder="输入搜索内容"/>
+			<span class="iconfont">&#xe638;</span>
+			</div>
+			<span class="phone iconfont">&#xe61f;</span>
+		</nav>
+	</header>
+	<div class="Hspacerlayer"></div>
+	<!-- 头部结束-->
+
+	<!-- 主体开始 -->
+	<div class="main">
+		<ul>
+			<li>
+				<a class="img" href="detail.html">
+					<img src="img/amxl.jpg" alt="">
+				</a>
+				<div class="info">
+					<p>阿莫西林 0.125g*50</p>
+					<span class="money">￥50</span>
+					<span class="num">库存：1546</span>
+					<div class="addsub">
+						<button class="sub">-</button>
+						<input type="text" value="5"/>
+						<button class="add">+</button>
+					</div>
+				</div>
+			</li>
+			
+			<li>
+				<a class="img" href="detail.html">
+					<img src="img/amxl.jpg" alt="">
+				</a>
+				<div class="info">
+					<p>阿莫西林 0.125g*50</p>
+					<span class="money">￥50</span>
+					<span class="num">库存：1546</span>
+					<div class="addsub">
+						<button class="sub">-</button>
+						<input type="text" value="5"/>
+						<button class="add">+</button>
+					</div>
+				</div>
+			</li>
+
+			<li>
+				<a class="img" href="detail.html">
+					<img src="img/amxl.jpg" alt="">
+				</a>
+				<div class="info">
+					<p>阿莫西林 0.125g*50</p>
+					<span class="money">￥50</span>
+					<span class="num">库存：1546</span>
+					<div class="addsub">
+						<button class="sub">-</button>
+						<input type="text" value="5"/>
+						<button class="add">+</button>
+					</div>
+				</div>
+			</li>
+
+
+			
+
+			
+			
+		</ul>
+	</div>
+	<!-- 主体结束 -->
+
+	<!-- 底部开始 -->
+	<footer>
+		<div class="left">
+			<span class="iconfont smallred">&#xe643;</span>
+			<span class="money">总价钱：￥351</span>
+		</div>
+		<a class="right" href="confirmO.html">			
+				确认订单	
+		</a>
+	</footer>
+	<!-- 底部结束 -->
+</body>
+
+<script src="js/smallred.js"></script>
+<script>
+	$(function(){	
+			smallred_init(20,30,18,5,-15,13); /*参数: 弧度 width height top right 字体大小*/
+			smallred_setnum(1000);
+	})
+</script>
+</html>

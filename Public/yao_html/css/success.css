@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+body {
+	background: #eee;
+}
+
+.Hspacerlayer {
+	height: 50px;
+}
+
+.main .orderInfo {
+	background: #fff;
+	padding:10px;
+	color: #444;
+}
+
+.main .orderInfo p {
+	margin:0;
+	line-height:40px;
+	border-bottom: 1px solid #ccc;
+}
+
+.main .orderInfo p span {
+	color: #cd0000;
+}
+
+.main a {
+	display: block;
+	margin:20 auto;
+	width:80%;
+	height: 45px;
+	background: rgb(109,203,239);
+	border:1px solid #ccc;
+	border-radius: 5px;
+	font-size: 17px;
+	color: #fff;
+	text-align: center;
+	line-height: 45px;
+}

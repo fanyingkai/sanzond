@@ -1,0 +1,113 @@
+@charset "UTF-8";
+
+body {
+	background:#eee;
+}
+
+.Hspacerlayer {
+	height: 50px;
+}
+.main .info {
+	background: #fff;
+	
+	border-bottom: 1px solid #ccc;
+}
+
+.main .info .img {
+	width: 40%;
+	margin:0 auto; 
+	padding-bottom: 10px;
+
+}
+
+.main .info .img img {
+	width: 100%;
+}
+
+.main .info .content {
+	padding:10px 10px 10px 20px;
+	border-top: 1px solid #ccc;
+	font-size: 15px;
+
+}
+
+.main .info .content p {
+	margin:0;
+	line-height: 30px;
+}
+
+.main .info .content .price {
+	font-size: 18px;
+	font-weight: bold;
+	color: #cd0000;
+	margin-right: 10px;
+}
+.main .info .content .num {
+	color: #666;
+}
+
+/* 加减控件 */
+.main .info .content .addsub {
+	margin-top: 10px;
+}
+.main .info .content .addsub button {
+	display: inline-block;
+	padding:0;
+	margin:0;
+	border:1px solid #ccc;
+	width: 30px;
+	height: 28px;
+}
+.main .info .content .addsub input{
+	z-index: -1;
+	width: 40px;
+	height: 24px;
+	border: none;
+	border-top:1px solid #ccc;
+	border-bottom:1px solid #ccc;
+	margin:-4px;
+	text-align: center;
+}
+
+
+.main .info .content .addsub .sub {
+	border-top-left-radius:5px;
+	border-bottom-left-radius:5px;
+
+}
+
+.main .info .content .addsub .add {
+	border-top-right-radius:5px;
+	border-bottom-right-radius:5px;
+}
+
+.main .detailInfo {
+	margin-top:10px;
+	background: #fff;
+	padding:10px 10px 10px 20px;
+}
+
+footer {
+	line-height: 50px;
+	margin:0;
+	padding:0;
+}
+
+footer .left {
+	display: inline-block;
+	float: left;
+	width: 70%;
+	position: relative;
+}
+
+
+
+footer .right {
+	display: inline-block;
+	background: rgb(109,203,239);
+	width: 30%;
+}
+
+footer .left .money {
+	margin:0 10px;
+}

@@ -1,0 +1,274 @@
+@charset "UTF-8";
+
+body {
+	background: #eee;
+}
+
+header ul {
+	clear: both;
+	width: 100%;
+	border-bottom: 1px solid #ccc;
+}
+
+header ul li {
+	display: inline-block;
+	width: 49%;
+	line-height: 40px;
+	text-align: center;
+
+}
+
+header ul .left {
+	border-bottom:1px solid rgb(109,203,239);
+}
+
+header ul .right {
+	border-bottom:none;
+}
+.Hspacerlayer {
+	height: 93px;
+}
+/* 我的订单详情 */
+
+.status {
+	z-index: -2;
+	
+}
+
+.status .orderstatus .left{
+	position: absolute;
+	
+}
+
+.status .orderstatus .left .bg {
+	background: #57BFE3;
+	position: absolute;
+	color: #fff;
+	left:18px;
+	top:30px;
+	height: 25px;
+	width:25px;
+	border-radius:50%;
+	display: inline-block;		
+	vertical-align:baseline;
+	white-space: nowrap;	
+}
+
+.status .orderstatus .left .people{
+	color:#666;
+	position: absolute;
+	left:4px;
+	top:1px;
+	
+}
+.status .orderstatus .left .line {
+
+	position: absolute;
+	width:0px;
+	height:50px;
+	border:1px solid #57BFE3;
+	top:60px;
+	left:29px;
+
+	
+}
+.status .orderstatus .right {
+	position:relative;
+}
+
+
+.status .orderstatus .right .triout {
+	top:30px;
+	left:50px;
+	position: absolute;
+    width: 0px;
+    height: 0px;
+    border-top: 11px solid transparent;
+    border-right: 11px solid #bbb;
+    border-bottom: 11px solid transparent;
+}
+.status .orderstatus .right .triin {
+	top:31px;
+	left:52px;
+	position: absolute;
+	width: 0px;
+    height: 0px;
+    border-top: 10px solid transparent;
+    border-right: 10px solid #fff;
+    border-bottom: 10px solid transparent;
+    
+}
+
+.status .orderstatus .right {
+	padding:20px 10px 0 60px;
+	
+}
+
+.status .orderstatus .right .content {
+	border:1px solid #bbb;
+	padding:10px;
+	background:#fff;
+}
+
+.status .orderstatus .right .content .r {
+	float:right;
+}
+.status .orderstatus .right .content p{
+	font-size:12px;
+	color:#666;
+	line-height:30px;
+	margin-bottom:0px;
+}
+.status {
+	
+	position:relative;
+}
+
+
+.status button {
+	display: block;
+	width: 80%;
+	height: 50px;
+	margin:20px auto;
+	text-align:center;
+	border-radius: 5px;
+	border:1px solid #ccc;
+	background: rgb(109,203,239);
+	font-size: 16px;
+	color: #fff;
+}
+
+.status .comment {
+	z-index: 10;
+	display:none;
+	top:20px;
+	width:100%;
+	position: absolute;
+	padding:15px;
+	
+	background:#fff;
+	border:1px solid #ccc;
+	border-radius:5px;
+	box-shadow: 4px 4px 4px #888888;
+	
+}
+
+
+.status .comment h4 {
+
+	text-align:center;
+	padding:10px 0px;
+	margin:0px;
+	border-bottom:1px solid #ccc;
+}
+.status .comment .x {
+	position:absolute;
+	color:#57BFE3;
+	right:5px;
+	top:5px;
+}
+.status .comment .s {
+	padding-left:10px;
+	color:#FFD322;
+	font-size:22px;
+}
+.status .comment .speak {
+	display:block;
+	line-height:40px;
+}
+.status .comment .stars {
+	display:inline-block;
+	line-height:50px;
+}
+
+.status .comment .button{
+	padding:0;
+	text-align:right;
+}
+.status .comment button{
+	
+	margin:10px 0 0 0;
+}
+
+
+
+.orderdetail {
+	display: none;
+	font-size: 15px;
+	z-index: -2;
+}
+.orderdetail .title {
+	padding:10px 15px;
+	color: #333;
+}
+
+.orderdetail .content {
+	background: #fff;
+	padding:0 15px;
+}
+
+.orderdetail .content ul {
+	
+	padding:0;
+	color: #666;
+}
+
+.orderdetail .content ul li{
+	list-style-type:none;
+	padding:5px 0;
+}
+
+.orderdetail .content ul li .right{	
+	float: right;
+	color: #cd0000;
+}
+
+.orderdetail .content ul li .tright{
+	float: right;
+	color: #666;
+}
+
+
+
+
+.orderdetail .content .detail {
+	border-bottom: 1px solid #ccc;
+}
+.orderdetail .content .detail img{
+	display:inline-block;
+
+}
+
+.orderdetail .content .detail .img {
+		line-height:80px;
+}
+
+.orderdetail .content .detail h4{
+	margin-top:15px;
+	font-size:17px;
+	color: #666;
+}
+
+.orderdetail .content .detail .money {
+	color:#cd0000;
+	margin-right:10px;
+}
+
+.orderdetail .goodsinfo {
+	background: #fff;
+	padding:0 15px;
+	color:#444;
+}
+
+.orderdetail .goodsinfo li {
+	line-height: 35px;
+}
+
+.orderdetail .goodsinfo li .price {
+	float: right;
+	margin-right: 10px;
+	color: #cd0000;
+}
+.orderdetail .goodsinfo li .num {
+	float: right;
+}

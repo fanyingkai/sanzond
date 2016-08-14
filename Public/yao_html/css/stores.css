@@ -1,0 +1,147 @@
+@charset "UTF-8";
+ 
+
+body {
+	background: #eee;
+}
+
+.Hspacerlayer {
+	height: 50px;
+}
+
+.main {
+	width: 100%;
+}
+
+.main .stores .top {
+	padding:10px 0px;
+	width: 100%;
+
+}
+
+.main .stores .bg{	
+	z-index: -1;
+	position: absolute;
+	width: 100%;
+	height: 100px;
+	background: url("../img/bj.jpg") center bottom;
+	background-size: cover;
+	border-bottom: 1px solid #ccc;
+    filter: url(blur.svg#blur); /* FireFox, Chrome, Opera */
+    -webkit-filter: blur(10px);/*  Chrome, Opera */
+       -moz-filter: blur(10px);
+        -ms-filter: blur(10px);    
+            filter: blur(10px);
+    
+    filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=10, MakeShadow=false); /* IE6~IE9 */
+}
+
+.main .stores .top img {
+	box-sizing: border-box;
+	display: inline-block;
+	border-radius: 50%;
+	vertical-align: middle;
+	width: 20%;
+	max-width: 100px;
+	margin-left:10px;
+}
+
+.main .stores .top .name {
+	display: inline-block;
+	margin-left: 10px;
+	width: 70%;
+}
+
+.main .stores .top p {
+	display:block;
+	color: #000;
+	font-size: 15px;
+
+}
+
+
+.Tinfo{
+ 	margin-top: 10px;
+	background: #fff;
+	padding:15px;
+	color: #444;
+}
+
+.Tinfo h4 {
+ 	margin:0;
+	color: #444;
+	font-size: 15px;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 10px;
+}
+.Tinfo li {
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 5px;
+
+}
+
+.Tinfo li p {
+	margin:0;
+ 	line-height: 30px;
+ 	font-size: 15px;
+ }
+.Tinfo li p .iconfont {
+	margin-right: 10px;
+	color: rgb(109,203,239);
+ }
+
+.Tinfo .add {
+  	text-align: center;
+  	line-height: 40px;
+  }
+.Tinfo .add .iconfont {
+ 	margin-right: 6px;
+ }
+
+.main .stores .bottom li p{
+	margin:0;
+	font-size: 15px;
+	line-height: 25px;
+}
+
+
+
+
+.main .headquarters {
+	margin-top: 20px;
+	background: #fff;
+	padding:0 10px;
+	color: #444;
+
+}
+
+.main .headquarters ul {
+
+}
+
+.main .headquarters ul li {
+	line-height: 45px;
+	border-bottom: 1px solid #ccc;
+
+}
+
+.main .headquarters ul li .left {
+	margin-right: 5px;
+	color: rgb(109,203,239);
+} 
+
+.main .headquarters ul li .choise {
+	float: right;
+}
+
+.main .headquarters ul li .text {
+	color:#666;
+}
+
+.main .headquarters ul li .address {
+	padding: 10px;
+}
+
+.main .headquarters ul li .address img {
+	width: 100%;
+}
