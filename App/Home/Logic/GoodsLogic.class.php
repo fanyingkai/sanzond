@@ -33,4 +33,14 @@ class GoodsLogic extends BaseLogic{
         $detail = $this->where($where)->find();
         return $detail;
     }
+    
+    /**
+     * 得到单个商品简单详情
+     */
+    public function getgoodsdetaily($nbbm) {
+        $field = 'nbbm,ypm,gg,lsj,ypcj,kcs';
+        $where = "nbbm = '{$nbbm}'";
+        $detail = $this->where($where)->field($field)->find();
+        return $detail;
+    }
 }

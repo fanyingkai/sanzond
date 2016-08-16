@@ -1,16 +1,23 @@
 <div class="left">		
 	<span class="iconfont smallred">&#xe643;</span>
-	<span class="money">总价钱：￥<strong id="totalprice">0</strong></span>
+	<span class="money">总价钱：￥<strong id="totalprice"><php> if(session('?totalprice')){ echo session('totalprice'); } else { echo 0;} </php></strong></span>
 </div>
-<a href="cart.html" class="right">
-	去购物车
+<a href="{$carturl}" class="right">
+	<if condition="ACTION_NAME eq 'gocart'">去结算<else/>去购物车</if>
 </a>
 <input type="hidden" id="focusval" value=""/>
+<script src="/Public/tipplug/jquery/jquery.cookie.js"></script>
 <script src="/Public/Static/Public/js/smallred.js"></script>
 <script>
-	$(function(){	
+	$(function(){
 		smallred_init(20,30,18,5,-15,13); /*参数: 弧度 width height top right 字体大小*/
-		smallred_setnum(0);
+		smallred_setnum(<php> 
+			if(session('?totalquantity')) {
+				echo session('totalquantity');
+			} else {
+				echo 0;
+			}
+		</php>);
 		/* 购物车js */
 		$('.add').click(function() {
 			nbbm = $(this).prev().val();
@@ -20,6 +27,7 @@
 			smallred_addnum(1);
 			price = $(this).parent().prev().prev().children().text();
 			addtotalprice(price);
+			addcart(nbbm,1);
 		});
 		
 		$('.sub').click(function() {
@@ -31,6 +39,7 @@
 			smallred_subnum(1);
 			price = $(this).parent().prev().prev().children().text();
 			subtotalprice(price);
+			subcart(nbbm,1);
 		});
 		
 		/* 获取输入焦点  */
@@ -42,11 +51,27 @@
 		$('.quantity').blur(function(){
 			oldquantity = $('#focusval').val();
 			newquantity = $(this).val();
+			nbbm = $(this).next().val();
+			/* 处理前台数据为0的情况 */
+			if(newquantity == 0) {
+				$.ajax({
+					type:"post",
+					url:"{:U('Cart/dealzero')}",
+					dataType:"json",
+					data:{'nbbm':nbbm},
+					success:function(data) {
+						if(data.status==0) {
+							alert(data.info);
+						}
+					}
+				});
+			}
 			if(newquantity < 0 ) {
 				$(this).val(oldquantity);
 				$(this).focus();
 				return;
 			}
+			
 			diff = Number(newquantity) - Number(oldquantity);
 			if(diff == 0 ) return;
 			price = parseFloat($(this).parent().prev().prev().children().text());
@@ -55,11 +80,20 @@
 			if(diff > 0 ) { /* 大于0的为增加 */
 				addtotalprice(zprice);
 				smallred_addnum(a);
+				addcart(nbbm,a);
 			} else {
-					subtotalprice(zprice);
-					smallred_subnum(a);
+				subtotalprice(zprice);
+				smallred_subnum(a);
+				subcart(nbbm,a);
 			}
 		});
+		
+		/*
+		$(window).bind('beforeunload',function(){
+			savecart();
+		});
+		*/
+		
 	});
 	
 	/* 添加总价钱 */
@@ -75,4 +109,56 @@
 		newprice = parseFloat(oldprice) - parseFloat(price);
 		$('#totalprice').text(newprice.toFixed(2));
 	}
+	function addcart(nbbm,quantity) {
+		totalprice = $('#totalprice').text();
+		totalquantity = smallred_getnum();
+		$.ajax({
+			type:"post",
+			url:"{:U('Cart/addcart')}",
+			dataType:"json",
+			data:{'nbbm':nbbm,'quantity':quantity,'totalprice':totalprice,'totalquantity':totalquantity},
+			success:function(data) {
+				if(data.status == 0) {
+					alert(data.info);
+				}
+			}
+		});
+	}
+	
+	function subcart(nbbm,quantity) {
+		totalprice = $('#totalprice').text();
+		totalquantity = smallred_getnum();
+		$.ajax({
+			type:"post",
+			url:"{:U('Cart/subcart')}",
+			dataType:"json",
+			data:{'nbbm':nbbm,'quantity':quantity,'totalprice':totalprice,'totalquantity':totalquantity},
+			success:function(data) {
+				if(data.status == 0) {
+					alert(data.info);
+				}
+			}
+		});
+	}
+	/*
+	function savecart() {
+		var json='{';
+		$('.quantity').each(function(i){
+			quantity=$(this).val();
+			if(quantity == 0) return true;
+			nbbm=$(this).next().val();
+			json = json+nbbm+':'+quantity+',';
+		});
+		//json = json.substring(0,json.length-1);
+		totalprice = $('#totalprice').text();
+		totalquantity = smallred_getnum();
+		json = json + "'totalquantity':"+totalquantity+','+"'totalprice':"+totalprice;
+		json = json + "}";
+		$.ajax({
+			type:"post",
+			url:"{:U('Cart/savecart')}",
+			dataType:"json",
+			data:eval('('+json+')')
+		});
+	} */
 </script>

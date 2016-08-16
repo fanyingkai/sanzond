@@ -5,10 +5,10 @@ use Think\Controller;
 class HomeController extends Controller{
     
     public function _initialize() {
-        $sectionsm = D('sections');
-        $sections = $sectionsm->sectionstree();
+        if(!session('?userid')) {
+            $this->redirect('Auth/login');
+        }
         $config = D('Config')->getconfig();
-        $this->assign('sections',$sections);
         $this->assign('config',$config);
     }
     
@@ -19,4 +19,7 @@ class HomeController extends Controller{
         parent::ajaxReturn($json);
     }
     
+    public function getuserid() {
+        return base64_decode(session('userid'));
+    }
 }

@@ -26,3 +26,21 @@ function smallred_init(size,width,height,top,right,font){
 function smallred_setnum(num) {
 	$('.smallred .smallredin').text(num);
 }
+
+function smallred_getnum() {
+	a = $('.smallred .smallredin').text();
+	return a;
+}
+
+function smallred_addnum(num) {
+	oldnum = $('.smallred .smallredin').text();
+	newnum = Number(oldnum) + num;
+	$('.smallred .smallredin').text(newnum);
+}
+
+function smallred_subnum(num) {
+	oldnum = $('.smallred .smallredin').text();
+	if(oldnum <= 0) return;
+	newnum = Number(oldnum) - num;
+	$('.smallred .smallredin').text(newnum);
+}

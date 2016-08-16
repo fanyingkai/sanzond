@@ -56,7 +56,15 @@
 					<span class="num">库存:{$vo.kcs}件</span>
 					<div class="addsub">
 						<button class="sub">-</button>
-						<input class="quantity" type="text" value="0"/>
+						<input class="quantity" type="text" value="<?php 
+						$var=0;
+						$arr=session('cart'); 
+						foreach($arr as $k=>$v) {
+						if ($k == $vo['nbbm'] ) {
+						$var=$v;break;} 
+						} 
+						echo $var; 
+						?>"/>
 						<input type="hidden" value="{$vo.nbbm}" />
 						<button class="add">+</button>
 					</div>					
@@ -84,7 +92,6 @@
     },function(){
         $(this).find('.down').css('display','none');
 		$(this).find('.iconfont').html('&#xe696;');
-
    	});
 </script>
 </block>

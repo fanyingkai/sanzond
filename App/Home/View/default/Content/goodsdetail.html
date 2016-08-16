@@ -27,10 +27,20 @@
 				<span class="price">￥<strong>{$detail.lsj}</strong></span>
 				<span class="num">库存:{$detail.kcs}</span>
 				<p class="name">{$detail.ypm}  {$detail.gg}</p>
+				<span style="display:none"><strong>{$detail.lsj}</strong></span>
 				<p class="place">{$detail.ypcj}</p>
 				<div class="addsub">
 						<button class="sub">-</button>
-						<input type="text" value="5"/>
+						<input class="quantity" type="text" value="<?php 
+						$var=0;
+						$arr=session('cart'); 
+						foreach($arr as $k=>$v) {
+						if ($k == $detail['nbbm'] ) {
+						$var=$v;break;} 
+						} 
+						echo $var; 
+						?>"/>
+						<input type="hidden" value="{$detail.nbbm}" />
 						<button class="add">+</button>
 				</div>	
 			</div> 

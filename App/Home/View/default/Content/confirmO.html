@@ -33,43 +33,16 @@
 		</div>
 		<div class="span">
 			<span>药品清单：</span>
-			<p class="edit">
-				<span class="iconfont">&#x3433;</span>修改
-			</p>
 		</div>
-		
 		<div class="goodsinfo">
 			<ul>
+				<foreach name="goodslist" item="vo">
 				<li>
-					<span class="name">阿莫西林</span>
-					<span class="price">￥9.90</span>
-					<div class="addsub">
-						<button class="sub">-</button>
-						<input type="text" value="5"/>
-						<button class="add">+</button>
-					</div>
+					<span class="name">{$vo.ypm}</span>
+					<span class="price">￥{$vo.lsj}</span>
+					<span class="addsub">x{$vo.quantity}</span>
 				</li>
-
-				<li>
-					<span class="name">阿莫西林</span>
-					<span class="price">￥9.90</span>
-					<div class="addsub">
-						<button class="sub">-</button>
-						<input type="text" value="5"/>
-						<button class="add">+</button>
-					</div>
-				</li>
-
-				<li>
-					<span class="name">阿莫西林</span>
-					<span class="price">￥9.90</span>
-					<div class="addsub">
-						<button class="sub">-</button>
-						<input type="text" value="5"/>
-						<button class="add">+</button>
-					</div>
-				</li>
-				
+				</foreach>
 			</ul>
 		</div>
 	</div>

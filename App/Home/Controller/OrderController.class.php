@@ -16,4 +16,8 @@ class OrderController extends ContentController {
     public function orderdetail() {
         $this->display('Content/orderdetail');
     }
+    
+    /**
+     * 
+     */
 }

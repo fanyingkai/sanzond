@@ -14,6 +14,7 @@ class GoodsController extends HomeController {
         $this->assign('categoryname',$category);
         $this->assign('categoryl',$categorylist);
         $this->assign('categorygoodslist',$categorygoodslist);
+        $this->assign('carturl',U('Goods/gocart'));
         $this->display('Content/goodslist');
     }
     
@@ -27,6 +28,7 @@ class GoodsController extends HomeController {
         $this->assign('categoryname','全部');
         $this->assign('categoryl',$categorylist);
         $this->assign('categorygoodslist',$categorygoodslist);
+        $this->assign('carturl',U('Goods/gocart'));
         $this->display('Content/goodslist');
     }
     
@@ -39,8 +41,17 @@ class GoodsController extends HomeController {
         $model = D('goods','Logic');
         $detail = $model->getgoodsdetail($nbbm);
         $this->assign('detail',$detail);
+        $this->assign('carturl',U('Goods/gocart'));
         $this->display('Content/goodsdetail');
     }
     
+
     
+    public function gocart() {
+        $model = D('cart','Logic');
+        $cartlist = $model->getcartlist();
+        $this->assign('carturl',U('Cart/confirmcart'));
+        $this->assign('cartlist',$cartlist);
+        $this->display('Content/cart');
+    }
 }

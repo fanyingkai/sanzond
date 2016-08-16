@@ -21,53 +21,24 @@
 <block name="main">
 	<div class="main">
 		<ul>
+			<foreach name="cartlist" item="vo">
 			<li>
 				<a class="img" href="detail.html">
-					<img src="img/amxl.jpg" alt="">
+					<img src="__PUBLIC__/img/amxl.jpg" alt="">
 				</a>
 				<div class="info">
-					<p>阿莫西林 0.125g*50</p>
-					<span class="money">￥50</span>
-					<span class="num">库存：1546</span>
+					<p>{$vo.ypm}  {$vo.gg}</p>
+					<span class="money">￥<strong>{$vo.lsj}</strong></span>
+					<span class="num">库存：{$vo.kcs}</span>
 					<div class="addsub">
 						<button class="sub">-</button>
-						<input type="text" value="5"/>
+						<input class="quantity" type="text" value="{$vo.quantity}"/>
+						<input type="hidden" value="{$vo.nbbm}" />
 						<button class="add">+</button>
 					</div>
 				</div>
 			</li>
-			
-			<li>
-				<a class="img" href="detail.html">
-					<img src="img/amxl.jpg" alt="">
-				</a>
-				<div class="info">
-					<p>阿莫西林 0.125g*50</p>
-					<span class="money">￥50</span>
-					<span class="num">库存：1546</span>
-					<div class="addsub">
-						<button class="sub">-</button>
-						<input type="text" value="5"/>
-						<button class="add">+</button>
-					</div>
-				</div>
-			</li>
-
-			<li>
-				<a class="img" href="detail.html">
-					<img src="img/amxl.jpg" alt="">
-				</a>
-				<div class="info">
-					<p>阿莫西林 0.125g*50</p>
-					<span class="money">￥50</span>
-					<span class="num">库存：1546</span>
-					<div class="addsub">
-						<button class="sub">-</button>
-						<input type="text" value="5"/>
-						<button class="add">+</button>
-					</div>
-				</div>
-			</li>
+			</foreach>
 		
 		</ul>
 	</div>
@@ -75,21 +46,9 @@
 <!-- 主体结束 -->
 
 <block name="footer">
-	<div class="left">
-	<span class="iconfont smallred">&#xe643;</span>
-	<span class="money">总价钱：￥351</span>
-	</div>
-	<a class="right" href="confirmO.html">			
-		确认订单	
-	</a>
+{:W('Gall/cartbuttom')}
 </block>
 
 <block name="js">
-<script src="js/smallred.js"></script>
-<script>
-	$(function(){	
-			smallred_init(20,30,18,5,-15,13); /*参数: 弧度 width height top right 字体大小*/
-			smallred_setnum(1000);
-	})
-</script>
+
 </block>

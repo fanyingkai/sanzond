@@ -33,5 +33,7 @@ class BaseLogic extends Model{
         $recommendctm = $this->where($where)->order('date_joined desc')->limit($limit)->select();
         return $recommendctm;
     }
-        
+    public function getuserid() {
+        return base64_decode(session('userid'));
+    }    
 }
