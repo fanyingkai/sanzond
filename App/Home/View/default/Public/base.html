@@ -3,11 +3,11 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
-	<title>太阳升订药系统</title>
+	<title><block name="title">太阳升订药系统</block></title>
 	<link rel="stylesheet" href="__PUBLIC__/css/common.css">
 	<link rel="stylesheet" href="/Public/Static/Public/css/font.css" type="text/css">
 	<link rel="stylesheet" href="/Public/Static/Public/css/smallred.css" type="text/css">
-	<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="/Public/tipplug/jquery/jquery.min.js"></script>
 	<block name="head"></block>
 </head>
 <body>
@@ -25,13 +25,13 @@
 		<block name="footer">
 		<ul>
 			<li>
-				<a href="index.html">
+				<a href="/">
 					<p class="iconfont">&#xe609;</p>
 					<p>首页</p>
 				</a>
 			</li>
 			<li>
-				<a href="list.html">
+				<a href="{:U('Goods/getallgoods')}">
 					<p class="iconfont">&#xe623;</p>
 					<p>订药</p>
 				</a>

@@ -1,4 +1,7 @@
 <extend name="Public:base" />
+<block name="title">
+{$categoryname}
+</block>
 <block name="head">
 	<link rel="stylesheet" href="__PUBLIC__/css/list.css">
 </block>
@@ -6,7 +9,7 @@
 <!-- 头部-->
 <block name="header">
 	<nav>
-		<a class="return" href="javascript:history.back()">
+		<a class="return" href="/">
 			<span class="iconfont">&#xe611;</span>	
 		</a>
 		<div class="search">
@@ -20,17 +23,9 @@
 			<span>档次分类</span>
 			<span class="iconfont">&#xe696;</span>
 			<div class="down">
-				<a href="">业务员</a>
-				<a href="">新品</a>
-				<a href="">品牌</a>
-				<a href="">医院品种</a>
-				<a href="">特殊品种</a>
-				<a href="">特定价</a>
-				<a href="">其他</a>
-				<a href="">普药</a>
-				<a href="">中药饮片</a>
-				<a href="">仁和（一）</a>
-				<a href="">仁和（二）</a>
+				<foreach name="categoryl" item="ca">
+				<a href="{:U('Goods/getcategorygoods',array('category'=>urlencode($ca['dmmc'])))}">{$ca.dmmc}</a>
+				</foreach>
 			</div>
 		</div>
 		<div class="div">
@@ -48,17 +43,18 @@
 <block name="main">
 	<div class="main">
 		<ul>
+			<foreach name="categorygoodslist" item="vo">
 			<li>
 				<div class="left">
-					<a href="detail.html">
-						<img src="img/amxl.jpg" alt="">
+					<a href="{:U('Goods/getgoodsdetail',array('id'=>urlencode($vo['nbbm'])))}">
+						<img src="__PUBLIC__/img/amxl.jpg" alt="{$vo.ypm}">
 					</a>
 				</div>
 				<div class="right">
-					<p>阿莫西林 0.125g*50/盒</p>
-					<p>哈药集团三精明水药业有限公司</p>
-					<span class="money">￥15</span>
-					<span class="num">库存：1112件</span>
+					<p>{$vo.ypm}  {$vo.gg}</p>
+					<p>{$vo.ypcj}</p>
+					<span class="money">￥{$vo.lsj}</span>
+					<span class="num">库存:{$vo.kcs}件</span>
 					<div class="addsub">
 						<button class="sub">-</button>
 						<input type="text" value="5"/>
@@ -66,63 +62,18 @@
 					</div>					
 				</div>
 			</li>
-
-			<li>
-				<div class="left">
-					<a href="detail.html">
-						<img src="img/amxl.jpg" alt="">
-					</a>
-				</div>
-				<div class="right">
-					<p>阿莫西林 0.125g*50/盒</p>
-					<p>哈药集团三精明水药业有限公司</p>
-					<span class="money">￥15</span>
-					<span class="num">库存：1112件</span>
-					<div class="addsub">
-						<button class="sub">-</button>
-						<input type="text" value="5"/>
-						<button class="add">+</button>
-					</div>					
-				</div>
-			</li>
-
-			<li>
-				<div class="left">
-					<a href="detail.html">
-						<img src="img/amxl.jpg" alt="">
-					</a>
-				</div>
-				<div class="right">
-					<p>阿莫西林 0.125g*50/盒</p>
-					<p>哈药集团三精明水药业有限公司</p>
-					<span class="money">￥15</span>
-					<span class="num">库存：1112件</span>
-					<div class="addsub">
-						<button class="sub">-</button>
-						<input type="text" value="5"/>
-						<button class="add">+</button>
-					</div>					
-				</div>
-			</li>	
+			</foreach>
+			
 		</ul>
 	</div>
 </block>
 
 <!-- 底部开始 -->
 <block name="footer">
-	<div class="left">
-		<span class="iconfont smallred">&#xe643;</span>
-		<span class="money">总价钱：￥351</span>
-	</div>
-	<a href="cart.html" class="right">
-			去购物车
-	</a>
+{:W('Gall/cartbuttom')}
 </block>
 <!-- 底部结束 -->
-
-
-<block class="js">
-<script src="js/smallred.js"></script>
+<block name="js">
 <script>
 /*tab*/
 	$('header .navigation .leftdiv').hover(function(){
@@ -136,12 +87,6 @@
 		$(this).find('.iconfont').html('&#xe696;');
 
    	});
-   	$(function(){	
-			smallred_init(20,30,18,5,-15,13); /*参数: 弧度 width height top right 字体大小*/
-			smallred_setnum(1000);
-	})
-
 </script>
-
 </block>
 
