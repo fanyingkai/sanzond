@@ -5,7 +5,6 @@
 <block name="head">
 	<link rel="stylesheet" href="__PUBLIC__/css/list.css">
 </block>
-
 <!-- 头部-->
 <block name="header">
 	<nav>
@@ -53,17 +52,17 @@
 				<div class="right">
 					<p>{$vo.ypm}  {$vo.gg}</p>
 					<p>{$vo.ypcj}</p>
-					<span class="money">￥{$vo.lsj}</span>
+					<span class="money">￥<strong>{$vo.lsj}</strong></span>
 					<span class="num">库存:{$vo.kcs}件</span>
 					<div class="addsub">
 						<button class="sub">-</button>
-						<input type="text" value="5"/>
+						<input type="text" value="0"/>
+						<input type="hidden" value="{$vo.nbbm}" />
 						<button class="add">+</button>
 					</div>					
 				</div>
 			</li>
-			</foreach>
-			
+			</foreach>		
 		</ul>
 	</div>
 </block>
