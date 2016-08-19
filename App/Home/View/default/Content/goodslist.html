@@ -6,19 +6,13 @@
 	<link rel="stylesheet" href="__PUBLIC__/css/list.css">
 </block>
 <!-- 头部-->
-<block name="header">
-	<nav>
-		<a class="return" href="/">
-			<span class="iconfont">&#xe611;</span>	
-		</a>
-		<div class="search">
-		<input type="text" placeholder="输入搜索内容"/>
-		<span class="iconfont">&#xe638;</span>
-		</div>
-		<span class="phone iconfont">&#xe61f;</span>
-	</nav>
+<block name="backurl">/</block>
+<block name="middle">
+	{:W('Gall/topsearch')}
+</block>
+<block name="other">
 	<div class="navigation">
-		<div class="div leftdiv">
+		<div class="tab leftTab">
 			<span>档次分类</span>
 			<span class="iconfont">&#xe696;</span>
 			<div class="down">
@@ -27,11 +21,11 @@
 				</foreach>
 			</div>
 		</div>
-		<div class="div">
+		<div class="tab centerTab" type="0">
 			<span>价格</span>
 			<span class="iconfont">&#xe649;</span>
 		</div>
-		<div class="div">
+		<div class="tab rightTab" type="0">
 			<span>库存</span>
 			<span class="iconfont">&#xe649;</span>
 		</div>
@@ -41,49 +35,26 @@
 
 <block name="main">
 	<div class="main">
-		<ul>
-			<foreach name="categorygoodslist" item="vo">
-			<li>
-				<div class="left">
-					<a href="{:U('Goods/getgoodsdetail',array('id'=>urlencode($vo['nbbm'])))}">
-						<img src="__PUBLIC__/img/amxl.jpg" alt="{$vo.ypm}">
-					</a>
-				</div>
-				<div class="right">
-					<p>{$vo.ypm}  {$vo.gg}</p>
-					<p>{$vo.ypcj}</p>
-					<span class="money">￥<strong>{$vo.lsj}</strong></span>
-					<span class="num">库存:{$vo.kcs}件</span>
-					<div class="addsub">
-						<button class="sub">-</button>
-						<input class="quantity" type="text" value="<?php 
-						$var=0;
-						$arr=session('cart'); 
-						foreach($arr as $k=>$v) {
-						if ($k == $vo['nbbm'] ) {
-						$var=$v;break;} 
-						} 
-						echo $var; 
-						?>"/>
-						<input type="hidden" value="{$vo.nbbm}" />
-						<button class="add">+</button>
-					</div>					
-				</div>
-			</li>
-			</foreach>		
+		<ul id="goodslist">
+			<span id="goodsinfo" style="display:none">0</span>
+			<span id="isfirst" style="display:none">0</span>
 		</ul>
 	</div>
 </block>
-
+<block name="wait">
+	<!--等待-->
+	<div id="shclFireballs"></div>
+</block>
 <!-- 底部开始 -->
 <block name="footer">
 {:W('Gall/cartbuttom')}
 </block>
 <!-- 底部结束 -->
 <block name="js">
+<script src="/Public/Static/Public/js/jquery.shCircleLoader.js"></script>
 <script>
 /*tab*/
-	$('header .navigation .leftdiv').hover(function(){
+	$('header .navigation .leftTab').hover(function(){
         var drop = $(this).find('.down');
 		if(drop.css('display')=='none'){
 			drop.css('display','block');
@@ -93,6 +64,181 @@
         $(this).find('.down').css('display','none');
 		$(this).find('.iconfont').html('&#xe696;');
    	});
+	
+	$('.navigation .centerTab').click(function(){
+		if($(this).attr('type')=='0'){
+			$(this).find('.iconfont').html('&#xe64a;');
+			$(this).attr('type','1');
+			sortprice('asc');
+		}else {
+			$(this).find('.iconfont').html('&#xe649;');
+			$(this).attr('type','0');
+			sortprice('desc');
+		}
+		$(this).css('border-bottom','1px solid rgb(109,203,239)');
+		$(this).next().css('border-bottom','none');
+	});
+	
+	$('.navigation .rightTab').click(function(){
+		if($(this).attr('type')=='0'){
+			$(this).find('.iconfont').html('&#xe64a;');
+			$(this).attr('type','1');
+			sortkcs('asc');
+		}else {
+			$(this).find('.iconfont').html('&#xe649;');
+			$(this).attr('type','0');
+			sortkcs('desc');
+		}
+		$(this).css('border-bottom','1px solid rgb(109,203,239)');
+		$(this).prev().css('border-bottom','none');
+	});
+	
+	function sortprice(order) {
+		var ic = $("#goodslist");
+		var divs = ic.find('.sortlist');
+		var arr = divs.get();
+		arr.sort(function(a,b) {
+			var ai = parseFloat($(a).find('.sortlist .right .money strong').text());
+			var bi = parseFloat($(b).find('.sortlist .right .money strong').text());
+			if(ai < bi) {
+				if(order=='asc') return 1;
+				else return -1;
+			} else if(ai > bi) {
+				if(order=='asc') return -1;
+				else return 1;
+			} else {
+				return 0;
+			}
+		});
+		ic.append(arr);
+	}
+	
+	function sortkcs(order) {
+		var ic = $("#goodslist");
+		var divs = ic.find('.sortlist');
+		var arr = divs.get();
+		arr.sort(function(a,b) {
+			var ai = parseFloat($(a).find('.sortlist .right .num span').text());
+			var bi = parseFloat($(b).find('.sortlist .right .num span').text());
+			if(ai < bi) {
+				if(order=='asc') return 1;
+				else return -1;
+			} else if(ai > bi) {
+				if(order=='asc') return -1;
+				else return 1;
+			} else {
+				return 0;
+			}
+		});
+		ic.append(arr);
+	}
+</script>
+<script>
+$(function(){
+	refreshtotal();
+	where = getwhere();
+	getgoodslist(where,0,'{:U('Goods/getgoodslist')}');
+});
+function getmorelist(){
+	where = getwhere();
+	page = $('#goodsinfo').text();
+	getgoodslist(where,page,'{:U('Goods/getgoodslist')}');
+}
+function getwhere() {
+	iswhere = $('#searchwhere').text();
+	if(iswhere=='0') {
+		where = "dmmc = '"+'{$categoryname}'+"'";
+	} else {
+		where = iswhere;
+	}
+	return where;
+}
+function getgoodslist(where,page,url) {
+	$.ajax({
+		type:"post",
+		url:url,
+		dataType:"json",
+		data:{'where':where,'page':page},
+		beforeSend:wait(),
+		success:function(data) {
+			if(data.status == 1) {
+				gli = data.data;
+				$('#goodsinfo').before(assign('goodsli',gli));
+				page = Number($('#goodsinfo').text()) + 1;
+				$('#goodsinfo').text(page);
+				$('#isfirst').text('0');
+			} else {
+				$(window).unbind('scroll');
+			}	
+		}
+	});
+}
+/* 超级简易模板引擎(字符串解析替换) */
+function assign(id,data) {
+	var html=document.getElementById(id).innerHTML;
+	var result="var p=[];with(obj){p.push('"
+		+html.replace(/[\r\n\t]/g," ")
+		.replace(/<%=(.*?)%>/g,"');p.push($1);p.push('")
+		.replace(/<%/g,"');")
+		.replace(/%>/g,"p.push('")
+		+"');}return p.join('');";
+	var fn = new Function("obj",result);
+	return fn(data);
+}
+</script>
+<script>
+/* 判断到达屏幕底部 */
+$(function(){
+	$(window).scroll(function(){
+		if($(document).scrollTop()>=$(document).height()-$(window).height()) {
+			isfirst = $('#isfirst').text();
+			if(isfirst = '0') {
+				$('#isfirst').text('1');
+				getmorelist();
+			}
+		}
+	});
+});
+/*等待*/
+function wait(){
+	$('#shclFireballs').shCircleLoader({
+		color: "red",
+		dots: 24,
+		dotsRadius: 5,
+		keyframes:
+		   "0%   {background: rgb(11,135,186);    {prefix}transform: scale(1)}\
+			20%  {background: rgb(112,205,239); {prefix}transform: scale(.4)}\
+			40%  {background: rgb(11,135,186);    {prefix}transform: scale(0)}\
+			50%  {background: rgb(11,135,186);    {prefix}transform: scale(1)}\
+			70%  {background: rgb(112,205,239); {prefix}transform: scale(.4)}\
+			90%  {background: rgb(11,135,186);    {prefix}transform: scale(0)}\
+			100% {background: rgb(11,135,186);    {prefix}transform: scale(1)}"
+	});
+}
+</script>
+<script type="text/html" id="goodsli">
+<% for(var i=0;i<gli.length;i++) { %>
+<li class="sortlist">
+	<div class="left">
+		<a href="<%=gli[i].detailurl %>">
+			<img src="<%=gli[i].imgurl %>" alt="<%=gli[i].ypm %>">
+		</a>
+	</div>
+	<div class="right">
+		<p><%=gli[i].ypm %>  <%=gli[i].gg %></p>
+		<p><%=gli[i].ypcj %></p>
+		<span class="money">￥<strong><%=gli[i].ypdj %></strong></span>
+		<span class="sail">零售价：￥<%=gli[i].lsj %></span>
+		<span class="num">库存:<span><%=gli[i].kcs %></span>件</span>
+		<div class="addsub">
+			<button class="sub">-</button>
+			<input class="quantity" type="text" value="<%=gli[i].quantity %>"/>
+			<input type="hidden" value="<%=gli[i].nbbm %>" />
+			<button class="add">+</button>
+		</div>					
+	</div>
+</li>
+<% } %>
 </script>
 </block>
 

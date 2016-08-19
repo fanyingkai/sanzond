@@ -1,1 +1,0 @@
-a:8:{i:0;s:3:"uid";i:1;s:10:"first_name";i:2;s:3:"sex";i:3;s:6:"idcard";i:4;s:7:"address";i:5;s:15:"date_lastupdate";s:3:"_pk";s:3:"uid";s:5:"_type";a:6:{s:3:"uid";s:7:"int(11)";s:10:"first_name";s:11:"varchar(60)";s:3:"sex";s:6:"int(1)";s:6:"idcard";s:11:"varchar(20)";s:7:"address";s:12:"varchar(220)";s:15:"date_lastupdate";s:9:"timestamp";}}

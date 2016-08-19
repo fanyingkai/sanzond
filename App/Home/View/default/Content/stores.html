@@ -1,53 +1,48 @@
 <extend name="Public:base" />
+<block name="title">{$cname}</block>
 <block name="head">
 	<link rel="stylesheet" href="__PUBLIC__/css/stores.css">
 </block>
-
-<!-- 头部-->
-<block name="header">
-	<nav>
-		<a class="return" href="javascript:history.back()">
-			<span class="iconfont">&#xe611;</span>	
-		</a>
-		<h4><a href="index.html">太阳升订单系统</a></h4>
-	</nav>
-</block>
-<!-- 头部结束-->
-
+<block name="pageinfo">5</block>
 <block name="main">
 	<div class="main">
 		<div class="stores">
 			<div class="bg">
 			</div>
 		 	<div class="top">
-				<img src="img/my.jpg" alt="">
+				<img src="__PUBLIC__/img/nmUser.png" alt="">
 				<div class="name">
-					<p>海南健甫大药房连锁经营有限公司东方东河普光映真分店</p>
+					<p>{$cname}</p>
 				</div>
 		 	</div>
 		</div>
 		
 		<ul class="Tinfo">
 	 		<h4>送货信息</h4>
+			<foreach name="contacts" item="vo">
 			<li>
 				<p>
-					<span class="iconfont">&#xe621;</span><span class="name">小明</span>
+					<span class="iconfont left">&#xe621;</span><span class="name">{$vo.name}</span>
+					<a href="{:U('User/editAddressJump',array('id'=>urlencode($vo['id'])))}" class="iconfont edit">&#x3433;</a>					
+					<a onclick="return note()" href="{:U('User/deleteAddress',array('id'=>urlencode($vo['id'])))}" class="iconfont delete">&#xe619;</a>				
+					
 				</p>
 				<p>
-					<span class="iconfont">&#xe61f;</span><span class="phone">17854623256</span>
+					<span class="iconfont left">&#xe61f;</span><span class="phone">{$vo.phone}</span>
 				</p>
 				<p>
-					<span class="iconfont">&#xe61e;</span>海南省海口市
+					<span class="iconfont left">&#xe61e;</span>{$vo.address}
 				</p>
 			</li>
-
-			<li class="add">
-				<a href="addAddress.html">
-					<span class="iconfont">&#xe623;</span><span>添加</span>
-				</a>
-			</li>
-		 </ul>
-
+			</foreach>
+			
+		</ul>
+		<div class="add">
+			<a href="{:U('User/addAddress')}">
+				<span class="iconfont">&#xe623;</span><span>添加</span>
+			</a>
+		</div>
+		
 		<div class="headquarters">
 			<ul>
 				<li>	
@@ -66,40 +61,16 @@
 		</div>
 	</div>	
 </block>
-
-<!-- 底部开始 -->
-<block name="footer">
-	<ul>
-		<li>
-			<a href="index.html">
-				<p class="iconfont">&#xe609;</p>
-				<p>首页</p>
-			</a>
-		</li>
-		<li>
-			<a href="list.html">
-				<p class="iconfont">&#xe623;</p>
-				<p>订药</p>
-			</a>
-		</li>
-		<li>
-			<a href="cart.html">
-				<p class="iconfont">&#xe643;</p>
-				<p>购物车</p>
-			</a>
-		</li>
-		<li>
-			<a href="order.html">
-				<p class="iconfont">&#xe636;</p>
-				<p>订单</p>
-			</a>
-		</li>
-		<li>
-			<a href="stores.html">
-				<p class="iconfont">&#xe62f;</p>
-				<p>门店</p>
-			</a>
-		</li>
-	</ul>
+<block name="js">
+<script>
+	function note(){
+		if(confirm('是否删除该收货地址？')){
+			return true;
+		}else{
+			return false;
+		}
+		
+	}
+</script>
 </block>
-<!-- 底部结束 -->
+

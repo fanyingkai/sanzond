@@ -1,1 +1,0 @@
-a:8:{i:0;s:2:"id";i:1;s:5:"event";i:2;s:10:"event_type";i:3;s:6:"remark";i:4;s:4:"user";i:5;s:11:"date_joined";s:3:"_pk";s:2:"id";s:5:"_type";a:6:{s:2:"id";s:7:"int(11)";s:5:"event";s:11:"varchar(68)";s:10:"event_type";s:11:"varchar(38)";s:6:"remark";s:4:"text";s:4:"user";s:11:"varchar(60)";s:11:"date_joined";s:8:"datetime";}}

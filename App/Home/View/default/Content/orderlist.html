@@ -1,117 +1,58 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>太阳升订单系统</title>
-	<script src="js/jquery.min.js"></script>
-	<link rel="stylesheet" href="css/font.css">
-	<link rel="stylesheet" href="css/common.css">
-	<link rel="stylesheet" href="css/order.css">
-</head>
-<body>
-	<!--头部-->
-	<header>
-		<nav>
-			<a class="return" href="javascript:history.back()">
-				<span class="iconfont">&#xe611;</span>	
-			</a>
-			<h4><a href="index.html">太阳升订单系统</a></h4>
-		</nav>
-		<ul class="tab">
-			<li class="left">
-				全部
-			</li>
-			<li class="center">
-				待确认
-			</li>
-			<li class="right">
-				待收获
-			</li>
-		</ul>
-	</header>
-	<div class="Hspacerlayer"></div>
-	<!-- 头部结束-->
-	<div class="main">
+<extend name="Public:base" />
+<block name="title">
+订单列表
+</block>
+<block name="head">
+<link rel="stylesheet" href="__PUBLIC__/css/order.css">
+</block>
+<block name="pageinfo">4</block>
+<block name="other">
+	<ul class="tab">
+		<a href="{:U('Order/orderlist')}">
+		<li class="left">
+			全部
+		</li>
+		</a>
+		<a href="{:U('Order/gettypeolist',array('type'=>urlencode('WC')))}">
+		<li class="center">
+			待确认
+		</li>
+		</a>
+		<a href="{:U('Order/gettypeolist',array('type'=>urlencode('WR')))}">
+		<li class="right">
+			待收货
+		</li>
+		</a>
+		<li style="display:none" id="statusinfo">{$statusinfo}</li>
+	</ul>
+</block>
+<block name="main">
+<div class="main">
 		<ul>
+			<foreach name="orderlist" item="vo">
 			<li>
-				<a href="orderdetail.html">
-					<p class="num">订单号：<span class="right">215555215</span></p>
-					<p class="money">订单金额：<span class="right">￥551</span></p>
+				<a href="{:U('Order/detail',array('ordercode'=>$vo['ordercode']))}">
+					<p class="num">订单号：<span class="right">{$vo.ordercode}</span></p>
+					<p class="money">订单金额：<span class="right">￥{$vo.totalprice}</span></p>
 					<p class="time">
 						下单时间：
-						<span class="right">2016-2-22</span> 
+						<span class="right">{:date('Y-m-d H:i:s',time())}</span> 
 						<span class="iconfont">&#xe688;</span>
 						<span class="fright">详情</span>
 					</p>
 				</a>
 			</li>
-
-			<li>
-				<a href="orderdetail.html">
-					<p class="num">订单号：<span class="right">215555215</span></p>
-					<p class="money">订单金额：<span class="right">￥551</span></p>
-					<p class="time">
-						下单时间：
-						<span class="right">2016-2-22</span> 
-						<span class="iconfont">&#xe688;</span>
-						<span class="fright">详情</span>
-					</p>
-				</a>
-			</li>
-
-			<li>
-				<a href="orderdetail.html">
-					<p class="num">订单号：<span class="right">215555215</span></p>
-					<p class="money">订单金额：<span class="right">￥551</span></p>
-					<p class="time">
-						下单时间：
-						<span class="right">2016-2-22</span> 
-						<span class="iconfont">&#xe688;</span>
-						<span class="fright">详情</span>
-					</p>
-				</a>
-			</li>
-			
+			</foreach>
 		</ul>
 	</div>
-
-	<!-- 底部开始 -->
-	<footer>
-		<ul>
-			<li>
-				<a href="index.html">
-					<p class="iconfont">&#xe609;</p>
-					<p>首页</p>
-				</a>
-			</li>
-			<li>
-				<a href="list.html">
-					<p class="iconfont">&#xe623;</p>
-					<p>订药</p>
-				</a>
-			</li>
-			<li>
-				<a href="cart.html">
-					<p class="iconfont">&#xe643;</p>
-					<p>购物车</p>
-				</a>
-			</li>
-			<li>
-				<a href="order.html">
-					<p class="iconfont">&#xe636;</p>
-					<p>订单</p>
-				</a>
-			</li>
-			<li>
-				<a href="stores.html">
-					<p class="iconfont">&#xe62f;</p>
-					<p>门店</p>
-				</a>
-			</li>
-		</ul>
-	</footer>
-	<!-- 底部结束 -->
-</body>
+</block>
+<block name="wait">
+	<!--等待-->
+	<div id="shclFireballs"></div>
+	
+</block>
+<block name="js">
+<script src="/Public/Static/Public/js/jquery.shCircleLoader.js"></script>
 <script>
 	/*头部tab*/
 	var oleft = $('header ul .left');
@@ -134,5 +75,22 @@
 		oleft.css('border-bottom','none');
 
 	});
+	
+	$(function(){
+		status = $('#statusinfo').text();
+		if(status == '0') return;
+		if(status == 'WC') {
+			ocenter = $('header ul .center');
+			ocenter.css('border-bottom','1px solid rgb(109,203,239)');
+			oright.css('border-bottom','none');
+			oleft.css('border-bottom','none');
+		}
+		if(status == 'WR') {
+			oright = $('header ul .right');
+			oright.css('border-bottom','1px solid rgb(109,203,239)');
+			oleft.css('border-bottom','none');
+			ocenter.css('border-bottom','none');
+		}
+	})
 </script>
-</html>
+</block>

@@ -40,8 +40,13 @@ body {
 	font-size: 18px;
 	font-weight: bold;
 	color: #cd0000;
-	margin-right: 10px;
+	
 }
+.main .info .content .sail {
+	color:#888;
+	font-size:10px;
+}
+
 .main .info .content .num {
 	color: #666;
 }

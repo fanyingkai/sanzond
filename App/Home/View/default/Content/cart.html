@@ -1,34 +1,35 @@
 <extend name="Public:base" />
+<block name="title">购物车</block>
 <block name="head">
 	<link rel="stylesheet" href="__PUBLIC__/css/cart.css">
 </block>
 <!-- 头部 -->
-<block name="header">
-	<nav>
-		<a class="return" href="javascript:history.back()">
-			<span class="iconfont">&#xe611;</span>	
-		</a>
-		<div class="search">
-		<input type="text" placeholder="输入搜索内容"/>
-		<span class="iconfont">&#xe638;</span>
-		</div>
-		<span class="phone iconfont">&#xe61f;</span>
-	</nav>	
+<block name='backurl'>javascript:history.go(-1)</block>
+<block name="middle">
+	<div class="search">
+	<input type="text" placeholder="输入搜索内容"/>
+	<span class="iconfont">&#xe638;</span>
+	</div>
 </block>
 <!-- 头部结束 -->
 
 <!-- 主体开始 -->
 <block name="main">
+	<empty name="cartlist">
+		<script>empty('cart',"{:U('Goods/getallgoods')}")</script>
+	<else/>
 	<div class="main">
 		<ul>
 			<foreach name="cartlist" item="vo">
 			<li>
-				<a class="img" href="detail.html">
-					<img src="__PUBLIC__/img/amxl.jpg" alt="">
+				<a class="img" href="{:U('Goods/getgoodsdetail',array('id'=>$vo.nbbm))}">
+					<img src="__PUBLIC__/img/none.png" alt="">
 				</a>
 				<div class="info">
 					<p>{$vo.ypm}  {$vo.gg}</p>
-					<span class="money">￥<strong>{$vo.lsj}</strong></span>
+					<p>{$vo.ypcj} </p>
+					<span class="money">￥<strong>{$vo.ypdj}</strong></span>
+					<span class="sail">零售价：￥{$vo.lsj}</span>
 					<span class="num">库存：{$vo.kcs}</span>
 					<div class="addsub">
 						<button class="sub">-</button>
@@ -42,6 +43,7 @@
 		
 		</ul>
 	</div>
+	</empty>
 </block>
 <!-- 主体结束 -->
 

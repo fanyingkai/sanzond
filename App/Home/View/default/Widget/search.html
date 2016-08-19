@@ -1,0 +1,14 @@
+<div class="search">
+	<form action="{:U('Goods/search')}" method="post" id="searchform">
+		<input type="text" name="keyword" placeholder="输入搜索内容"/>
+		<span class="iconfont">&#xe638;</span>
+		<span style="display:none" id="searchwhere"><empty name="where">0<else/>{$where}</empty></span>
+	</form>
+	<script>
+		$('.search .iconfont').click(function(){
+			keyword = $(this).prev().val();
+			if(keyword=='') return;
+			else $('#searchform').submit();
+		});
+	</script>
+</div>

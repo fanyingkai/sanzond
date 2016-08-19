@@ -9,7 +9,7 @@ header .navigation{
 	width: 100%;
 	border-bottom: 1px solid #ccc;
 }
-header .navigation .div {
+header .navigation .tab {
 	text-align: center;
 	display: inline-block;
 	width: 32%;
@@ -18,11 +18,11 @@ header .navigation .div {
 
 }
 
-header .navigation .leftdiv {
+header .navigation .leftTab {
 	position: relative;
 }
 
-header .navigation .leftdiv .down {
+header .navigation .leftTab .down {
 	display: none;
 	position: absolute;
 	text-align: left;
@@ -36,7 +36,7 @@ header .navigation .leftdiv .down {
 	box-shadow:0px 0px 4px #ccc;
 }
 
-header .navigation .leftdiv .down a {
+header .navigation .leftTab .down a {
 	padding-left:10px;
 	display: block;
 	border-bottom:1px solid #ccc;
@@ -48,7 +48,7 @@ header .navigation .div .iconfont {
 
 
 .main {
-	padding:10px;
+	padding-bottom:10px;
 }
 
 .main ul li {
@@ -56,18 +56,20 @@ header .navigation .div .iconfont {
 	padding-top: 5px;
 	padding-bottom: 25px;
 	border-bottom: 1px solid #ccc;
-
+	height:100px;
 }
 
 .main ul li .left {
 	box-sizing: border-box;
 	padding:5px;
 	width: 28%;
+	height:100px;
 	display: inline-block;
 
 }
 .main ul li .left img {
 	width: 100%;
+	max-height:100px;
 	max-width: 500px;
 
 }
@@ -79,25 +81,30 @@ header .navigation .div .iconfont {
 	text-align: left;
 	float: right;
 	width: 70%;
-
-
 }
 .main ul li .right p {
 	margin:5px 0;
-
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 }
 
 
 
 .main ul li .right .money {
 	color:#cd0000;
-	margin-right:10px;
+	
+}
+
+.main ul li .right .sail {
+	color:#888;
+	font-size:10px;
 }
 
 .main ul li .right .num {
+	
 	color:#888;
 }
-
 .main ul li .right .addsub {
 	margin-top: 10px;
 }
@@ -154,9 +161,37 @@ footer .right {
 	display: inline-block;
 	background: rgb(109,203,239);
 	width: 30%;
+	
+}
+
+footer .mask {
+	display:none;
+	position:absolute;
+	z-index:110;
+	width:30%;
+	height:50px;
+	top:0;
+	right:0;
+	background:#666;
+	filter:alpha(opacity=50);  
+    -moz-opacity:0.5;  
+    -khtml-opacity: 0.5;  
+    opacity: 0.5;  
 }
 
 footer .left .money {
 	margin:0 10px;
+}
+
+
+/*等待*/
+
+
+#shclFireballs{
+	
+	width:50x; 
+	height:50px; 
+	margin:-10px auto 0 auto;
+	
 }
 

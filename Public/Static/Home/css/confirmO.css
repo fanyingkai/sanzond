@@ -5,10 +5,11 @@
 }
 body {
 	background: #eee;
+	color: #666;
 }
 
 .main .peopleinfo {
-	padding:10px;
+	padding:1px;
 	background: #fff;
 
 
@@ -16,60 +17,39 @@ body {
 
 .main h4 {
 	color: #444;
-	font-size: 16px;
+	font-size: 15px;
 	line-height: 40px;
 	margin-left:10px;
 	font-weight: 400;
 }
 
-
-
-.main .peopleinfo .group {
-	width:100%;
-	height: 54px;
-	padding:10px 0 0 0;
-}
-
-.main .peopleinfo .group input {
-	margin:0 auto;
-	float: left;
-	display: inline-block;
-	border:1px solid #ccc;
-	width:80%;
-	height: 40px;
-	font-size: 16px;
-	border-top-left-radius: 5px;
-	border-bottom-left-radius: 5px;
-}
-
-.main .peopleinfo .group button {
-	padding:0;
-	background: #eee;
-	width:60px;
-	text-align: center;
-	font-size: 12px;
-	height: 44px;
-	color: #444;
-	margin-left: -1px;
-	border-top-right-radius: 5px;
-	border-bottom-right-radius: 5px;
+.main .peopleinfo input {
+	display: block;
+	margin: 10px auto;
+	padding:0 5px;
+	height:40px;
+	width: 80%;
+	font-size: 15px;
+	border-radius: 5px;
 	border:1px solid #ccc;
 }
 
-.main .span {
+
+
+.main .title {
 	padding:0 20px 0 10px;
 	line-height: 40px;
-}
-
-.main .span .edit {
-	display: inline-block;
-	margin:0;
-	float: right;
 	font-size: 15px;
 }
 
-.main .span .edit .iconfont {
-	margin-right: 3px;
+.main .title span {
+	color: #444;
+}
+
+.main .title p {
+	margin:0;
+	display: inline-block;
+	float: right;
 }
 
 .main .goodsinfo {
@@ -87,46 +67,36 @@ body {
 	margin-right: 20px;
 }
 .main .goodsinfo ul li .price {
-	
-	color: #cd0000;
-}
-
-.main .goodsinfo ul li .addsub {
 	float: right;
-	margin-right:20px;
+	color: #cd0000;
+	margin-right:10px;
 }
 
+.main .goodsinfo ul li .num {
+	float: right;
+	margin-right:30px;
+}
 
-.main .goodsinfo ul li .addsub button {
+.main .count {
+	margin-top: 10px;
+	background: #fff;
+}
+
+.main .count span{
 	display: inline-block;
-	padding:0;
-	margin:0;
-	border:1px solid #ccc;
-	width: 30px;
-	height: 28px;
-}
-.main .goodsinfo ul li .addsub input{
-	z-index: -1;
-	width: 40px;
-	height: 24px;
-	border: none;
-	border-top:1px solid #ccc;
-	border-bottom:1px solid #ccc;
-	margin:-4px;
-	text-align: center;
+	line-height: 35px;
 }
 
-.main .goodsinfo ul li .addsub .sub {
-	border-top-left-radius:5px;
-	border-bottom-left-radius:5px;
-
+.main .count .price{
+	float: right;
+	color: #cd0000;
+	margin-right:10px;
 }
 
-.main .goodsinfo ul li .addsub .add {
-	border-top-right-radius:5px;
-	border-bottom-right-radius:5px;
+.main .count .num {
+	float: right;
+	margin-right:30px;
 }
-
 
 
 footer button {
@@ -139,3 +109,133 @@ footer button {
 	color: #fff;
 	font-size: 16px;
 }
+
+/* 模态框 */
+.model {
+	display: none;
+	z-index: 100;
+	top:0;
+	right:0;
+	left: 0;
+	position: fixed;
+	width: 100%;
+}
+
+.model .mask {
+	height: 998px;
+	opacity: 0.5;
+	position: absolute;
+	top:0;
+	right:0;
+	left: 0;
+	background: rgb(51,51,51);
+}
+
+.model .content {
+	position: absolute;
+	top:100px;
+	height: 200px;
+	width: 320px;
+	background: #fff;
+	border:1px solid #ccc;
+	border-radius: 5px;
+	box-shadow: 0px 0px 4px #888;
+	left:50%;
+	top:200px;
+	margin-left:-160px;  /*设置为宽度的一半*/
+	margin-top:-100px;   /*设置为高度的一半*/
+	overflow: auto;
+}
+
+.model .content h4 {
+	font-size: 16px;
+	text-align: center;
+	line-height: 35px;
+	border-bottom: 1px solid #ccc;
+}
+
+.model .content ul li {
+	display: block;
+	width: 90%;
+	margin:10px auto;
+	border-radius: 5px;
+	box-shadow: 0px 0px 4px #888;
+	border:1px solid #ccc;
+
+}
+.model .content ul li p {
+	font-size:15px;
+	padding:10px 0 10px 10px;
+}
+
+.model .content ul li .name {
+	border-bottom: 1px dashed #ccc;
+	position:relative;
+}
+
+.model .content ul li .name .iconfont {
+	position:absolute;
+	right:10px;
+	color:#cd0000;
+}
+
+.model .content ul li .name .no {
+	z-index:110;
+}
+
+.model .content ul li .name .yes {
+	display:none;
+}
+
+
+/*等待*/
+
+.wait {
+	display: none;
+	height: 998px;
+	opacity: 0.5;
+	position: absolute;
+	top:0;
+	right:0;
+	left: 0;
+	background: rgb(51,51,51);
+	z-index: 100;
+}
+.contentW {
+	display: none;
+	z-index: 101;
+	position: absolute;
+	top:0;
+	right:0;
+	left: 0;
+	height: 998px;
+	width: 100%;
+	
+}
+.contentW p {
+	font-size: 18px;
+	color: #444;
+	text-align: center;
+	font-weight: bold;
+	margin-top: 20px;
+}
+#shclFireballs{
+	
+	width:100px; height:100px; margin:100px auto 0px auto;
+}
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

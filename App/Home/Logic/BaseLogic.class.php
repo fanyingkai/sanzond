@@ -35,5 +35,5 @@ class BaseLogic extends Model{
     }
     public function getuserid() {
         return base64_decode(session('userid'));
-    }    
+    }
 }

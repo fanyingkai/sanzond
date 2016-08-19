@@ -80,3 +80,24 @@ function http( $url, $method = 'GET', array $postfields = array(), array $header
     curl_close ($ci);
     return $response;
 }
+
+function getuserid() {
+    return base64_decode(session('userid'));
+}
+
+function getuid() {
+	return base64_decode(session('uid'));
+}
+
+/**
+ * 记录日志函数
+ */
+function writelog($event,$type,$remark) {
+	$data['userid'] = getuserid();
+	$data['event'] = $event;
+	$data['eventtype'] = $type;
+	$data['remark'] = $remark;
+	$data['client_ip'] = get_client_ip();
+	$data['date_joined'] = time();
+	M('log')->add($data);
+}

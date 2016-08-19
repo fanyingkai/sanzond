@@ -1,0 +1,133 @@
+<extend name="Public:base" />
+<block name="title">
+订单列表
+</block>
+<block name="head">
+<link rel="stylesheet" href="__PUBLIC__/css/order.css">
+</block>
+<block name="pageinfo">4</block>
+<block name="other">
+	<ul class="tab">
+		<li class="left">
+			全部
+		</li>
+		<li class="center">
+			待确认
+		</li>
+		<li class="right">
+			待收获
+		</li>
+	</ul>
+</block>
+<block name="main">
+<div class="main">
+		<ul>
+			<li id="orderinfo" style="display:none">0</li>
+			<li id="isfirst" style="display:none">0</li>
+			<li id="where" style="display:none">0</li>
+		</ul>
+	</div>
+</block>
+<block name="wait">
+	<!--等待-->
+	<div id="shclFireballs"></div>
+	
+</block>
+<block name="js">
+<script src="/Public/Static/Public/js/jquery.shCircleLoader.js"></script>
+<script src="/Public/Static/Public/js/wypt.js"></script>
+<script>
+	/*头部tab*/
+	var oleft = $('header ul .left');
+	var oright = $('header ul .right');
+	var ocenter = $('header ul .center');
+	oleft.click(function(){
+		oleft.css('border-bottom','1px solid rgb(109,203,239)');
+		oright.css('border-bottom','none');
+		ocenter.css('border-bottom','none');
+	});
+	oright.click(function(){
+		oright.css('border-bottom','1px solid rgb(109,203,239)');
+		oleft.css('border-bottom','none');
+		ocenter.css('border-bottom','none');
+
+	});
+	ocenter.click(function(){
+		ocenter.css('border-bottom','1px solid rgb(109,203,239)');
+		oright.css('border-bottom','none');
+		oleft.css('border-bottom','none');
+
+	});
+	/*等待*/
+	$('#shclFireballs').shCircleLoader({
+	    color: "red",
+	    dots: 24,
+	    dotsRadius: 14,
+	    keyframes:
+	       "0%   {background: rgb(11,135,186);    {prefix}transform: scale(1)}\
+	        20%  {background: rgb(112,205,239); {prefix}transform: scale(.4)}\
+	        40%  {background: rgb(11,135,186);    {prefix}transform: scale(0)}\
+	        50%  {background: rgb(11,135,186);    {prefix}transform: scale(1)}\
+	        70%  {background: rgb(112,205,239); {prefix}transform: scale(.4)}\
+	        90%  {background: rgb(11,135,186);    {prefix}transform: scale(0)}\
+	        100% {background: rgb(11,135,186);    {prefix}transform: scale(1)}"
+	});
+</script>
+<script>
+/* 判断到达屏幕底部 */
+$(function(){
+	where = $('#where').text();
+	getorderlist(where,0,'{:U('Goods/getgoodslist')}');
+
+	$(window).scroll(function(){
+		if($(document).scrollTop()>=$(document).height()-$(window).height()) {
+			isfirst = $('#isfirst').text();
+			if(isfirst = '0') {
+				alert();
+				$('#isfirst').text('1');
+				getmorelist();
+			}
+		}
+	});
+});
+
+function getmorelist() {
+	where = $('#where').text();
+	page = $('#orderinfo').text();
+	getgoodslist(where,page,'{:U('Goods/getgoodslist')}');
+}
+function getorderlist(where,page,url) {
+	$.ajax({
+		type:'post',
+		url:url,
+		dataType:"json",
+		data:{'where':where,'page':page},
+		success:function(data){
+			if(data.status==1) {
+				oli = data.data;
+				$('#orderinfo').before(assign('orderli',oli));
+				page = Number($('#orderinfo').text()) + 1;
+				$('#orderinfo').text(page);
+				$('#isfirst').text('0');
+			}
+		}
+	});
+}
+</script>
+<script type="text/html" id="orderli">
+<% for(var i=0;i<oli.length;i++) { %>
+	<li>
+		<a href="<%=oli[i].odurl %>">
+			<p class="num">订单号：<span class="right"><%=oli[i].ordercode %></span></p>
+			<p class="money">订单金额：<span class="right">￥<%=oli[i].totalprice %></span></p>
+			<p class="time">
+				下单时间：
+				<span class="right"><%=oli[i].date_joined %></span> 
+				<span class="iconfont">&#xe688;</span>
+				<span class="fright">详情</span>
+			</p>
+		</a>
+	</li>
+<% } %>
+</script>
+</block>

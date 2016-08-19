@@ -1,0 +1,110 @@
+<extend name="Public:base" />
+<block name="title">
+{$categoryname}
+</block>
+<block name="head">
+	<link rel="stylesheet" href="__PUBLIC__/css/list.css">
+</block>
+<!-- 头部-->
+<block name="other">
+	<div class="navigation">
+		<div class="div leftdiv">
+			<span>档次分类</span>
+			<span class="iconfont">&#xe696;</span>
+			<div class="down">
+				<foreach name="categoryl" item="ca">
+				<a href="{:U('Goods/getcategorygoods',array('category'=>urlencode($ca['dmmc'])))}">{$ca.dmmc}</a>
+				</foreach>
+			</div>
+		</div>
+		<div class="div">
+			<span>价格</span>
+			<span class="iconfont">&#xe649;</span>
+		</div>
+		<div class="div">
+			<span>库存</span>
+			<span class="iconfont">&#xe649;</span>
+		</div>
+	</div>
+</block>
+<!-- 头部结束-->
+
+<block name="main">
+	<div class="main">
+		<ul>
+			<foreach name="categorygoodslist" item="vo">
+			
+			<li>
+				<div class="left">
+					<a href="{:U('Goods/getgoodsdetail',array('id'=>urlencode($vo['nbbm'])))}">
+						<img src="__PUBLIC__/img/amxl.jpg" alt="{$vo.ypm}">
+					</a>
+				</div>
+				<div class="right">
+					<p>{$vo.ypm}  {$vo.gg}</p>
+					<p>{$vo.ypcj}</p>
+					<span class="money">￥<strong>{$vo.ypdj}</strong></span>
+					<span class="sail">零售价：￥{$vo.lsj}</span>
+					<span class="num">库存:{$vo.kcs}件</span>
+					<div class="addsub">
+						<button class="sub">-</button>
+						<input class="quantity" type="text" value="<?php 
+						$var=0;
+						$arr=session('cart'); 
+						foreach($arr as $k=>$v) {
+						if ($k == $vo['nbbm'] ) {
+						$var=$v;break;} 
+						} 
+						echo $var; 
+						?>"/>
+						<input type="hidden" value="{$vo.nbbm}" />
+						<button class="add">+</button>
+					</div>					
+				</div>
+			</li>
+			</foreach>
+			
+		</ul>
+		<span id="scrollmark" style="display:none"></span>
+	</div>
+</block>
+
+<!-- 底部开始 -->
+<block name="footer">
+{:W('Gall/cartbuttom')}
+</block>
+<!-- 底部结束 -->
+<block name="js">
+<script>
+/*tab*/
+	$('header .navigation .leftdiv').hover(function(){
+        var drop = $(this).find('.down');
+		if(drop.css('display')=='none'){
+			drop.css('display','block');
+			$(this).find('.iconfont').html('&#xe6f4;');
+		}
+    },function(){
+        $(this).find('.down').css('display','none');
+		$(this).find('.iconfont').html('&#xe696;');
+   	});
+</script>
+<script>
+function assign(id,data) {
+	var html = $('#'+id).html();
+	var result="var p=[];with(obj){p.push('"
+            +html.replace(/[\r\n\t]/g," ")
+            .replace(/<%=(.*?)%>/g,"');p.push($1);p.push('")
+            .replace(/<%/g,"');")
+            .replace(/%>/g,"p.push('")
+            +"');}return p.join('');";
+    var fn=new Function("obj",result);
+    return fn(data);
+}
+
+function display(id,temstr){
+	$('#'+id).html(temstr);
+}
+</script>
+
+</block>
+

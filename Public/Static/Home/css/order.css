@@ -58,3 +58,11 @@ header ul .left {
 .main ul li .time .iconfont {
 	float: right;
 }
+
+
+/*等待*/
+
+#shclFireballs{
+	
+	width:100px; height:100px; margin:100px auto 0px auto;
+}

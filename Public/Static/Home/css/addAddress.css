@@ -9,7 +9,7 @@
 	text-align: center;
 }
 
-.main textarea, button ,input {
+.main textarea,input {
 	display: block;
 	margin:20px auto;
 	border: 1px solid #ccc;
@@ -25,13 +25,13 @@
 }
 
 
-.main textarea, button{
+.main textarea, .btn{
 	width: 80%;
 	font-size: 15px;
 	height: 80px;
 	
 }
-.main button {
+.main .btn{
 	width: 80%;
 	font-size: 18px;
 	display: block;

@@ -65,6 +65,9 @@ body {
 	background: #fff;
 	padding:15px;
 	color: #444;
+	height:210px;
+	overflow:auto;
+	border:1px solid #ccc;
 }
 
 .Tinfo h4 {
@@ -85,18 +88,36 @@ body {
  	line-height: 30px;
  	font-size: 15px;
  }
-.Tinfo li p .iconfont {
+.Tinfo li p .left {
 	margin-right: 10px;
 	color: rgb(109,203,239);
  }
-
-.Tinfo .add {
-  	text-align: center;
-  	line-height: 40px;
-  }
-.Tinfo .add .iconfont {
- 	margin-right: 6px;
+ 
+ .Tinfo li p .edit {
+	 display:inline-block;
+	 float:right;
+	 font-size:20px;
  }
+ .Tinfo li p .delete {
+	 display:inline-block;
+	 float:right;
+	 margin-right:30px;
+	 font-size:20px;
+ }
+
+.main .add {
+	background:#fff;
+	text-align:center;
+	
+}
+
+.main .add a {
+	margin:10px 0 10px 0;
+	display:inline-block;
+	border:1px solid #ccc;
+	padding:5px 15px;
+	border-radius:4px;
+}
 
 .main .stores .bottom li p{
 	margin:0;

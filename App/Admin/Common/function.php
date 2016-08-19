@@ -7,12 +7,11 @@ function recordlog($event,$eventtype,$remark="") {
     $user = M('user')->field('username')->where(array('id'=>$uid))->find();
     $username = $user['username'];
     $data = array(
-        'user'   => $uid,
-        'username'=>$username,
+        'userid'   => $uid,
         'eventtype'=>$eventtype,
         'event' => $event,
         'remark'=>$remark,
-        'date_joined'=>date("Y-m-d H:i:s"),
+        'date_joined'=>time(),
         'client_ip'=>get_client_ip(),
     );
     M('log')->add($data);

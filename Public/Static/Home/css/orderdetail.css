@@ -120,7 +120,7 @@ header ul .right {
 	margin-bottom:0px;
 }
 .status {
-	
+	z-index:103;
 	position:relative;
 }
 

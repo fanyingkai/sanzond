@@ -27,7 +27,7 @@ class PublicController extends Controller {
             'gid'       =>$user['gid'],
             'username'  =>$user['username'],
         );
-        $Model->where(array('id'=>$usersession['uid']))->setField('date_update',date("Y-m-d H:i:s",time()));
+        $Model->where(array('id'=>$usersession['uid']))->setField('last_login',date("Y-m-d H:i:s",time()));
         session('user',$usersession);
         //记录日志
         recordlog('登录后台系统','系统操作');

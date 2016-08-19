@@ -2,27 +2,6 @@
 namespace Home\Controller;
 
 class CartController extends HomeController {
-    /**
-     * 保存购物车
-     * $return json{'status':status,'info':info,'data':data}
-     */
-    /*
-     public function savecart() {
-     session('totalprice',$_POST['totalprice']);
-     unset($_POST['totalprice']);
-     session('totalquantity',$_POST['totalquantity']);
-     unset($_POST['totalquantity']);
-     if(session('?cart')) {
-     $arr = session('cart');
-     foreach($_POST as $k=>$v) {
-     $arr[$k] = $v;
-     }
-     session('cart',$arr);
-     } else {
-     session('cart',$_POST);
-     }
-     $this->ajaxReturn(1, 'ok', 0);
-     } */
     
     /**
      * 处理前台数量为0的情况
@@ -94,13 +73,27 @@ class CartController extends HomeController {
      */
     public function confirmcart() {
         $model = D('cart','Logic');
+		$userm = D('sanuser','Logic');
         $goodslist = $model->getcartlist();
+		$contacts = $userm->getUsercontact();
+		//var_dump($contacts);die;
+		$this->assign('contacts',$contacts);
         $this->assign('goodslist',$goodslist);
         $this->display('Content/confirmO');
     }
     
     
-    public function test() {
-        echo ACTION_NAME;
+    public function gettotal() {
+        if(session('?totalprice'))
+			$totalprice = session('totalprice');
+		else
+			$totalprice = 0;
+		if(session('?totalquantity'))
+			$totalquantity = session('totalquantity');
+		else
+			$totalquantity = 0;
+		$data['totalprice'] = $totalprice;
+		$data['totalquantity'] = $totalquantity;
+		$this->ajaxReturn(1,0,$data);
     }
 }

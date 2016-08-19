@@ -18,4 +18,8 @@ class GallWidget extends Controller {
     public function cartbuttom() {
         $this->display('Widget:cartbuttom');
     }
+	
+	public function topsearch() {
+		$this->display('Widget:search');
+	}
 }

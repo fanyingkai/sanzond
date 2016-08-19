@@ -5,52 +5,64 @@
 <a href="{$carturl}" class="right">
 	<if condition="ACTION_NAME eq 'gocart'">去结算<else/>去购物车</if>
 </a>
+<div class="mask"></div>
 <input type="hidden" id="focusval" value=""/>
 <script src="/Public/tipplug/jquery/jquery.cookie.js"></script>
 <script src="/Public/Static/Public/js/smallred.js"></script>
 <script>
 	$(function(){
 		smallred_init(20,30,18,5,-15,13); /*参数: 弧度 width height top right 字体大小*/
-		smallred_setnum(<php> 
-			if(session('?totalquantity')) {
-				echo session('totalquantity');
-			} else {
-				echo 0;
-			}
-		</php>);
+		refreshtotal();
 		/* 购物车js */
-		$('.add').click(function() {
+		
+		$(document).on('click','.add',function() {
 			nbbm = $(this).prev().val();
 			oldquantity = $(this).prev().prev().val();
 			newquantity = Number(oldquantity) + 1;
 			$(this).prev().prev().val(newquantity);
 			smallred_addnum(1);
-			price = $(this).parent().prev().prev().children().text();
+			price = getprice(this);
 			addtotalprice(price);
 			addcart(nbbm,1);
+			if(smallred_getnum()=='0'){
+				$('footer .mask').show();
+			}else {
+				$('footer .mask').hide();
+			}
 		});
 		
-		$('.sub').click(function() {
+		$(document).on('click','.sub',function() {
 			nbbm = $(this).next().next().val();
 			oldquantity = $(this).next().val();
 			if(oldquantity <= 0) return;
 			newquantity = Number(oldquantity) - 1;
 			$(this).next().val(newquantity);
 			smallred_subnum(1);
-			price = $(this).parent().prev().prev().children().text();
+			price = getprice(this);
 			subtotalprice(price);
 			subcart(nbbm,1);
+			if(smallred_getnum()=='0'){
+				$('footer .mask').show();
+			}else {
+				$('footer .mask').hide();
+			}
 		});
 		
 		/* 获取输入焦点  */
-		$('.quantity').focus(function(){
+		$(document).on('focus','.quantity',function(){
 			$('#focusval').val($(this).val());
 		});
 		
 		/* 失去输入焦点数量移开  */
-		$('.quantity').blur(function(){
+		$(document).on('blur','.quantity',function(){
 			oldquantity = $('#focusval').val();
 			newquantity = $(this).val();
+			if(!checkval(newquantity)) {
+				alert('禁止输入除数字外的任何字符');
+				$(this).val(oldquantity);
+				$(this).focus();
+				return false;
+			}
 			nbbm = $(this).next().val();
 			/* 处理前台数据为0的情况 */
 			if(newquantity == 0) {
@@ -74,7 +86,7 @@
 			
 			diff = Number(newquantity) - Number(oldquantity);
 			if(diff == 0 ) return;
-			price = parseFloat($(this).parent().prev().prev().children().text());
+			price = parseFloat(getprice(this));
 			a = Math.abs(diff);
 			zprice = a * price;
 			if(diff > 0 ) { /* 大于0的为增加 */
@@ -86,16 +98,19 @@
 				smallred_subnum(a);
 				subcart(nbbm,a);
 			}
+			
+			if(smallred_getnum()=='0'){
+				$('footer .mask').show();
+			}else {
+				$('footer .mask').hide();
+			}
 		});
-		
-		/*
-		$(window).bind('beforeunload',function(){
-			savecart();
-		});
-		*/
-		
 	});
 	
+	function checkval(a) {
+		if(isNaN(a)) return false;
+		return true;
+	}
 	/* 添加总价钱 */
 	function addtotalprice(price) {
 		oldprice = $('#totalprice').text();
@@ -140,25 +155,28 @@
 			}
 		});
 	}
-	/*
-	function savecart() {
-		var json='{';
-		$('.quantity').each(function(i){
-			quantity=$(this).val();
-			if(quantity == 0) return true;
-			nbbm=$(this).next().val();
-			json = json+nbbm+':'+quantity+',';
-		});
-		//json = json.substring(0,json.length-1);
-		totalprice = $('#totalprice').text();
-		totalquantity = smallred_getnum();
-		json = json + "'totalquantity':"+totalquantity+','+"'totalprice':"+totalprice;
-		json = json + "}";
+	
+	function getprice(a) {
+		price = $(a).parent().prev().prev().prev().children().text();
+		return price;
+	}
+	
+	function refreshtotal() {
 		$.ajax({
-			type:"post",
-			url:"{:U('Cart/savecart')}",
-			dataType:"json",
-			data:eval('('+json+')')
+			type:"get",
+			url:"{:U('Cart/gettotal')}",
+			success:function(data){
+				if(data.status==1) {
+					total = data.data;
+					$('#totalprice').text(total.totalprice);
+					smallred_setnum(total.totalquantity);
+					if(totalquantity=='0'){
+						$('footer .mask').show();
+					}else {
+						$('footer .mask').hide();
+					}
+				}
+			}
 		});
-	} */
+	}
 </script>

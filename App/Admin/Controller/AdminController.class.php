@@ -51,6 +51,4 @@ class AdminController extends Controller {
             $this->error('您无权限操作此方法，请联系管理员',0,2);
         }
     }
-    
-
 }

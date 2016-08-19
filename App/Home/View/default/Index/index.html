@@ -4,15 +4,19 @@
 	<link rel="stylesheet" href="__PUBLIC__/css/index.css">
 </block>
 <!-- 头部 -->
-<block name="header">
-	<nav>
-		<div class="search">
-		<input type="text" placeholder="输入搜索内容"/>
-		<span class="iconfont">&#xe638;</span>
-		</div>
-		<span class="phone iconfont">&#xe61f;</span>
-	</nav>
+<block name="logo">
+	<div class="logo">
+			<img src="__PUBLIC__/img/headerlogo.png" alt="">
+	</div>
 </block>
+<block name="pageinfo">1</block>
+<block name="left">
+	<a class="return"></a>
+</block>
+<block name="middle">
+	{:W('Gall/topsearch')}
+</block>
+		
 <!-- 头部结束 -->
 <block name="main">
 {:W('Gall/banner')}
@@ -42,33 +46,32 @@
 	<ul class="new">
 		<li class="leftli">
 			<div class="left">
-				<p>阿司匹林</p>
-				<p>够新&nbsp;够实惠</p>
+				<p class="name">阿司匹林</p>
+				<p class="info"><span style="color:#cd0000">>></span>够新&nbsp;够实惠</p>
 			</div>
 			<div class="right">
 				<div class="img">
-				<img src="__PUBLIC__/img/amxl.jpg" alt="">
-			</div>
+					<img src="__PUBLIC__/img/amxl.jpg" alt="">
+				</div>
 			</div>
 		</li>
 		<li class="rightli">
 			<div class="left">
-				<p>阿司匹林</p>
-				<p>够新&nbsp;够实惠</p>
+				<p class="name">阿司匹林</p>
+				<p class="info"><span style="color:#cd0000">>></span>&nbsp;够实惠</p>
 			</div>
 			<div class="right">
-			<div class="img">
-				<img src="__PUBLIC__/img/amxl.jpg" alt="">
-			</div>
-				
+				<div class="img">
+					<img src="__PUBLIC__/img/amxl.jpg" alt="">
+				</div>
 			</div>
 		</li>
 	</ul>
 	<ul class="new">
 		<li class="leftli">
 			<div class="left">
-				<p>阿司匹林</p>
-				<p>够新&nbsp;够实惠</p>
+				<p class="name">阿司匹林</p>
+				<p class="info"><span style="color:#cd0000">>></span>&nbsp;够实惠</p>
 			</div>
 			<div class="right">
 				<div class="img">
@@ -78,8 +81,8 @@
 		</li>
 		<li class="rightli">
 			<div class="left">
-				<p>阿司匹林</p>
-				<p>够新&nbsp;够实惠</p>
+				<p class="name">阿司匹林</p>
+				<p class="info"><span style="color:#cd0000">>></span>&nbsp;够实惠</p>
 			</div>
 			<div class="right">
 			<div class="img">

@@ -1,8 +1,4 @@
-
-
-
 function empty(type,url){
-	
 	switch(type){
 		case 'cart':
 			$(document.body).append('<div id="emptydiv"><span class="iconfont">&#xe643;</span><h4>购物车为空！！！</h4><a href="'+url+'"><button class="btn btn-default">去逛逛！</button></a></div>');

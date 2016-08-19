@@ -7,20 +7,41 @@
 	<link rel="stylesheet" href="__PUBLIC__/css/common.css">
 	<link rel="stylesheet" href="/Public/Static/Public/css/font.css" type="text/css">
 	<link rel="stylesheet" href="/Public/Static/Public/css/smallred.css" type="text/css">
+	<link rel="stylesheet" href="/Public/Static/Public/css/empty.css">
 	<script src="/Public/tipplug/jquery/jquery.min.js"></script>
+	<script src="/Public/Static/Public/js/empty.js"></script>
 	<block name="head"></block>
 </head>
 <body>
-
 <!-- 顶部-->
 	<header>
-		<block name="header"></block>
+		<block name="logo"></block>
+		<nav data="<block name='pageinfo'></block>">
+			<block name="left">
+			<a class="return" href="<block name='backurl'>javascript:history.back()</block>">
+				<span class="iconfont">&#xe611;</span>	
+			</a>
+			</block>
+			<block name="middle">
+			<div class="search">
+				<h4><a href="/">太阳升订单系统</a></h4>
+			</div>
+			</block>
+			<block name="right">
+			<a href="tel:18889562302">
+			<span class="phone iconfont">&#xe61f;</span>
+			</a>
+			</block>
+		</nav>
+		<block name="other"></block>
 	</header>
 	<div class="Hspacerlayer"></div>
 <!-- 顶部结束-->
 	<block name="main"></block>
 <!-- 底部开始 -->
-	<div class="Fspacerlayer"></div>
+	<div class="Fspacerlayer">
+		<block name="wait"></block>
+	</div>
 	<footer>
 		<block name="footer">
 		<ul>
@@ -37,19 +58,19 @@
 				</a>
 			</li>
 			<li>
-				<a href="cart.html">
+				<a href="{:U('Goods/gocart')}">
 					<p class="iconfont">&#xe643;</p>
 					<p>购物车</p>
 				</a>
 			</li>
 			<li>
-				<a href="order.html">
+				<a href="{:U('Order/orderlist')}">
 					<p class="iconfont">&#xe636;</p>
 					<p>订单</p>
 				</a>
 			</li>
 			<li>
-				<a href="stores.html">
+				<a href="{:U('User/index')}">
 					<p class="iconfont">&#xe62f;</p>
 					<p>门店</p>
 				</a>
@@ -60,6 +81,35 @@
 <!-- 底部结束 -->
 
 </body>
+<script>
+	//底部导航
+	var ulo = $('footer ul li');
+	switch($('header nav').attr('data')){
+		case "1":cssSet(ulo.eq(0).find('a'));
+				break;
+		case "2":cssSet(ulo.eq(1).find('a'));
+				break;
+		case "3":cssSet(ulo.eq(2).find('a'));
+				break;
+		case "4":cssSet(ulo.eq(3).find('a'));
+				break;
+		case "5":cssSet(ulo.eq(4).find('a'));
+				break;
+		default:break;
+	}
+	function cssSet(object){
+		object.css({'color':'#fff',
+					'display':'block',
+				    'border-radius':'5px',		    
+				    'text-align':'center',
+				    'background':'-webkit-linear-gradient(rgb(11,135,186), rgb(112,205,239))',
+					'background':'-o-linear-gradient(rgb(11,135,186), rgb(112,205,239))',
+					'background':'-moz-linear-gradient(rgb(11,135,186), rgb(112,205,239)',
+					'background':'linear-gradient(rgb(11,135,186), rgb(112,205,239))'
+				  });
+		
+	}
+</script>
 <block name="js">
 </block>
 </html>
