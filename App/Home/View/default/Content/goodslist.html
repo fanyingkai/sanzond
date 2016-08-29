@@ -163,13 +163,18 @@ function getgoodslist(where,page,url) {
 		success:function(data) {
 			if(data.status == 1) {
 				gli = data.data;
+				if(gli.length<6) {
+					$('#shclFireballs').attr('id','sbno');
+					$('#sbno').html('<center>没有更多了</center>');
+				}
 				$('#goodsinfo').before(assign('goodsli',gli));
 				page = Number($('#goodsinfo').text()) + 1;
 				$('#goodsinfo').text(page);
 				$('#isfirst').text('0');
 			} else {
-				$(window).unbind('scroll');
-			}	
+				$('#shclFireballs').attr('id','sbno');
+				$('#sbno').html('<center>没有更多了</center>');
+			}
 		}
 	});
 }
@@ -192,7 +197,8 @@ $(function(){
 	$(window).scroll(function(){
 		if($(document).scrollTop()>=$(document).height()-$(window).height()) {
 			isfirst = $('#isfirst').text();
-			if(isfirst = '0') {
+			//防止重复请求
+			if(isfirst == '0') {
 				$('#isfirst').text('1');
 				getmorelist();
 			}
@@ -232,7 +238,7 @@ function wait(){
 		<span class="num">库存:<span><%=gli[i].kcs %></span>件</span>
 		<div class="addsub">
 			<button class="sub">-</button>
-			<input class="quantity" type="text" value="<%=gli[i].quantity %>"/>
+			<input class="quantity" type="tel" value="<%=gli[i].quantity %>"/>
 			<input type="hidden" value="<%=gli[i].nbbm %>" />
 			<button class="add">+</button>
 		</div>					

@@ -9,10 +9,10 @@
 	<div class="main">
 		<div class="info">
 			<div class="img">
-				<img src="__PUBLIC__/img/amxl.jpg" alt="">
+				<img src="<if condition="$detail['thumbnails'] ==''">__PUBLIC__/img/none.png<else/>/Uploads/{$detail.thumbnails}</if>" alt="{$detail.ypm}">
 			</div>
 			<div class="content">
-				<span class="price">￥<strong>{$detail.lsj}</strong></span>
+				<span class="price">￥<strong>{$detail.ypdj}</strong></span>
 				<span class="sail">零售价：￥{$detail.lsj}</span>
 				<span class="num">库存:{$detail.kcs}</span>
 				<p class="name">{$detail.ypm}  {$detail.gg}</p>
@@ -21,7 +21,7 @@
 				<p class="place">{$detail.ypcj}</p>
 				<div class="addsub">
 						<button class="sub">-</button>
-						<input class="quantity" type="text" value="<?php 
+						<input class="quantity" type="tel" value="<?php 
 						$var=0;
 						$arr=session('cart'); 
 						foreach($arr as $k=>$v) {
@@ -36,7 +36,7 @@
 			</div> 
 		</div>
 		<div class="detailInfo">
-			没有详细信息
+			<php>echo html_entity_decode($detail['content'])</php>
 		</div>
 	</div>
 </block>

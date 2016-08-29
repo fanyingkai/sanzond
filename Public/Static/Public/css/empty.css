@@ -21,6 +21,9 @@
 	background:#ccc;
 	border:1px solid #ccc;
 	border-radius:5px;
-	padding:5px 10px;
-	box-shadow:0px 0px 4px rgb(112,205,239);
+	padding:10px 30px;
+	font-size:16px;
+	color:#fff;
+	font-weight:bold;
+	
 }

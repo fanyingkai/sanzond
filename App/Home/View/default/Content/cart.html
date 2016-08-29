@@ -17,13 +17,17 @@
 <block name="main">
 	<empty name="cartlist">
 		<script>empty('cart',"{:U('Goods/getallgoods')}")</script>
+		<style>footer {border-top:none;}</style>
 	<else/>
+	<a href="{:U('Goods/deleteCart')}" onclick="return confirm('是否清空购物车？')">
+		<div class="deleteAll">清空</div>
+	</a>
 	<div class="main">
 		<ul>
 			<foreach name="cartlist" item="vo">
 			<li>
-				<a class="img" href="{:U('Goods/getgoodsdetail',array('id'=>$vo.nbbm))}">
-					<img src="__PUBLIC__/img/none.png" alt="">
+				<a class="img" href="{:U('Goods/getgoodsdetail',array('id'=>urlencode($vo['nbbm'])))}">
+					<img src="<if condition="$vo['thumbnails']==''">__PUBLIC__/img/none.png<else/>/Uploads/{$vo.thumbnails}</if>"alt="">
 				</a>
 				<div class="info">
 					<p>{$vo.ypm}  {$vo.gg}</p>
@@ -33,7 +37,7 @@
 					<span class="num">库存：{$vo.kcs}</span>
 					<div class="addsub">
 						<button class="sub">-</button>
-						<input class="quantity" type="text" value="{$vo.quantity}"/>
+						<input class="quantity" type="tel" value="{$vo.quantity}"/>
 						<input type="hidden" value="{$vo.nbbm}" />
 						<button class="add">+</button>
 					</div>
@@ -48,9 +52,10 @@
 <!-- 主体结束 -->
 
 <block name="footer">
+<notempty name="cartlist">
 {:W('Gall/cartbuttom')}
+</notempty>
 </block>
 
 <block name="js">
-
 </block>

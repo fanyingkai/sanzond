@@ -1,0 +1,70 @@
+<extend name="Public:base" />
+<block name="main">
+<div class="container-fluid">
+	<!-- Page Heading -->
+	<div class="row">
+	    <div class="col-lg-12">
+	        <ol class="breadcrumb">
+	            <li class="active">
+	                <i class="fa fa-dashboard"></i> 药品列表
+	            </li>
+	        </ol>
+	    </div>
+	</div>
+	<!-- /.row -->
+	<div class="row">
+		<form role="form" action="{:U('Content/ctmsearch',array('logic'=>'sangoods'))}" method="post">
+		    <div class="form-inline col-xs-4">
+	            <input class="form-control" name="keyword" value="{$keyword}">
+	        </div>
+	        <div class="col-xs-2">
+	         <button type="submit" class="btn btn-primary">查 询</button>
+	        </div>
+	    </form>
+    </div>
+	    
+   	<div class="row">
+ 	  <div class="col-lg-12">
+        <ol class="breadcrumb">
+        </ol>
+      </div>
+	  <div class="col-lg-12">
+	      <div class="table-responsive">
+	          <table class="table table-bordered table-hover table-striped">
+	              <thead>
+	                  <tr>
+	                  	  <th>序号</th>
+	                      <th>商品名称</th>
+	                      <th>缩略图</th>
+						  <th>是否首页推荐</th>
+						  <th>是否新品</th>
+	                      <th>状态</th>
+	                      <th>操作</th>
+	                      <th>最后一次更新时间</th>
+	                  </tr>
+	              </thead>
+	              <tbody>
+	                 <foreach name="listsangoods" item="vo">
+	                  <tr>
+	                      <td><?php $s=intval(I('p','1')); echo ((($s - 1) * $fena) + ($key + 1));?></td>
+	                      <td>{$vo.ypm}</td>
+	                      <td>{$vo.thumbnails}</td>
+	                      <td><if condition="$vo['is_recommend'] eq 1">是<else/>否</if></td>
+						  <td><if condition="$vo['is_new'] eq 1">是<else/>否</if></td>
+						  <td><if condition="$vo['is_active'] eq 1">是<else/>否</if></td>
+	                      <td>
+	                      <a href="{:U('Content/ctmdisplay',array('logic'=>'sangoods','action'=>'edit','id'=>$vo['nbbm']))}"><span>编辑</span></a> 
+	                      <a href="javascript:delctm('sangoods','{$vo.nbbm}');">删除</a>
+	                      </td>
+	                      <td>{:date('Y-m-d H:i:s',$vo['date_update'])}</td>
+	                  </tr>
+	                 </foreach>
+	              </tbody>
+	          </table>
+	          {$page}
+	      </div>
+	  </div>
+	</div>
+	
+</div>
+</block>

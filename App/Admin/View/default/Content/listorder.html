@@ -12,16 +12,14 @@
 	    </div>
 	</div>
 	    
-   	<div class="row">
-   	<!-- 
+   	<div class="row"> 
  	  <div class="col-lg-12">
         <ol class="breadcrumb">
             <li>
-                <a href="{:U('Content/ctmdisplay',array('logic'=>'order','action'=>'add'))}"><i class="glyphicon glyphicon-plus"></i> 添加服务</a>
+                <a href="{:U('Wys/Gef/goef')}"><i class="glyphicon glyphicon-plus"></i>导出全部订单</a>
             </li>
         </ol>
       </div>
-       -->
 	  <div class="col-lg-12">
 	      <div class="table-responsive">
 	          <table class="table table-bordered table-hover table-striped">
@@ -31,8 +29,11 @@
 	                      <th>订单编号</th>
 	                      <th>客户</th>
 	                      <th>订单总价</th>
-	                      <th>联系方式</th>
+	                      <th>联系人</th>
+						  <th>联系方式</th>
+						  <th>收货地址</th>
 	                      <th>状态</th>
+						  <th>下载次数</th>
 	                      <th>操作</th>
 	                      <th>订单时间</th>
 	                      <th>更新时间</th>
@@ -43,15 +44,24 @@
 	                  <tr>
 	                      <td><?php $s=intval(I('p','1')); echo ((($s - 1) * $fena) + ($key + 1));?></td>
 	                      <td>{$vo.ordercode}</td>
-	                      <td>{$vo.name}</td>
+	                      <td>{$vo.client}</td>
 	                      <td>￥{$vo.totalprice}元</td>
-	                      <td>{$vo.telephone}</td>
-	                      <td><if condition="$vo['is_active'] eq 1">可用<else/>不可用</if></td>
+	                      <td>{$vo.contact}</td>
+						  <td>{$vo.phone}</td>
+						  <td>{$vo.address}</td>
+	                      <td><switch name="vo.status">
+							<case value="G">下单</case>
+							<case value="GC">已确认</case>
+							<case value="GCS">已发货</case>
+							<case value="GCSR">确认收货</case>
+							<default/>已取消
+						  </switch></td>
+						  <td>{$vo.downnum}</td>
 	                      <td>
-	                      <a href="{:U('Content/ctmdisplay',array('logic'=>'cws','action'=>'edit','id'=>$vo['id']))}"><span>编辑</span></a> 
+	                      <a href="{:U('Content/ctmdisplay',array('logic'=>'order','action'=>'edit','id'=>$vo['id']))}"><span>编辑</span></a> 
 	                      <a href="javascript:delctm('cws','{$vo.id}');">删除</a>
 	                      </td>
-	                      <td>{$vo.date_joined}</td>
+	                      <td>{:date('Y-m-d H:i:s',$vo['date_joined'])}</td>
 	                      <td>{$vo.date_update}</td>
 	                  </tr>
 	                 </foreach>

@@ -2,7 +2,7 @@
 	<span class="iconfont smallred">&#xe643;</span>
 	<span class="money">总价钱：￥<strong id="totalprice"><php> if(session('?totalprice')){ echo session('totalprice'); } else { echo 0;} </php></strong></span>
 </div>
-<a href="{$carturl}" class="right">
+<a id="carturl" href="{$carturl}" class="right">
 	<if condition="ACTION_NAME eq 'gocart'">去结算<else/>去购物车</if>
 </a>
 <div class="mask"></div>
@@ -14,7 +14,6 @@
 		smallred_init(20,30,18,5,-15,13); /*参数: 弧度 width height top right 字体大小*/
 		refreshtotal();
 		/* 购物车js */
-		
 		$(document).on('click','.add',function() {
 			nbbm = $(this).prev().val();
 			oldquantity = $(this).prev().prev().val();
@@ -51,6 +50,7 @@
 		/* 获取输入焦点  */
 		$(document).on('focus','.quantity',function(){
 			$('#focusval').val($(this).val());
+			$(this).val('');
 		});
 		
 		/* 失去输入焦点数量移开  */
@@ -58,12 +58,16 @@
 			oldquantity = $('#focusval').val();
 			newquantity = $(this).val();
 			if(!checkval(newquantity)) {
-				alert('禁止输入除数字外的任何字符');
+				message('太阳升提醒','禁止输入除数字外的任何字符');
 				$(this).val(oldquantity);
 				$(this).focus();
 				return false;
 			}
 			nbbm = $(this).next().val();
+			if(newquantity=='') {
+				$(this).val(oldquantity);
+				return;
+			}
 			/* 处理前台数据为0的情况 */
 			if(newquantity == 0) {
 				$.ajax({
@@ -73,7 +77,7 @@
 					data:{'nbbm':nbbm},
 					success:function(data) {
 						if(data.status==0) {
-							alert(data.info);
+							message('太阳升提醒',data.info);
 						}
 					}
 				});
@@ -134,7 +138,7 @@
 			data:{'nbbm':nbbm,'quantity':quantity,'totalprice':totalprice,'totalquantity':totalquantity},
 			success:function(data) {
 				if(data.status == 0) {
-					alert(data.info);
+					message('太阳升提醒',data.info);
 				}
 			}
 		});
@@ -150,7 +154,7 @@
 			data:{'nbbm':nbbm,'quantity':quantity,'totalprice':totalprice,'totalquantity':totalquantity},
 			success:function(data) {
 				if(data.status == 0) {
-					alert(data.info);
+					message('太阳升提醒',data.info);
 				}
 			}
 		});
@@ -170,7 +174,7 @@
 					total = data.data;
 					$('#totalprice').text(total.totalprice);
 					smallred_setnum(total.totalquantity);
-					if(totalquantity=='0'){
+					if(total.totalquantity=='0'){
 						$('footer .mask').show();
 					}else {
 						$('footer .mask').hide();

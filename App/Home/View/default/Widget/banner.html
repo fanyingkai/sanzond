@@ -1,27 +1,13 @@
 <!-- 幻灯片-->
 	<div class="slider">
 	  <ul>
-		 <li>
-		    <a href="" target="_blank">
-		    	<img src="__PUBLIC__/img/y1.jpg" alt="">
+		<foreach name="banner" item="vo">
+		<li>
+		    <a href="{:U($vo['url'])}" target="_blank">
+		    	<img src="/Uploads/{$vo.img_url}" alt="">
 		    </a>
 	    </li>
-	    <li>
-		    <a href="" target="_blank">
-		    	<img src="__PUBLIC__/img/amxl.jpg" alt="">
-		    </a>
-	    </li>
-	    <li>
-		    <a href="" target="_blank">
-		    	<img src="__PUBLIC__/img/y2.jpg" alt="">
-		    </a>
-	    </li>
-	    <li>
-		    <a href="" target="_blank">
-		    	<img src="__PUBLIC__/img/aspl.jpg" alt="">
-		    </a>
-	    </li>   
-		
+		</foreach>
 	  </ul>
 	</div>
 <script type="text/javascript" src="/Public/Static/Public/js/yxMobileSlider.js"></script>

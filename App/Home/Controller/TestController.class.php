@@ -1,17 +1,16 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
-
 class TestController extends Controller {
 	
 	public function clear() {
-		session('totalprice',null);
-		session('totalquantity',null);
-		session('cart',null);
+		session(null);
 	}
 	
 	public function getsession() {
 		var_dump($_SESSION);die;
+		echo getuserid();
+		echo getuid();
 	}
 	
 	public function goodstest() {
@@ -90,5 +89,83 @@ class TestController extends Controller {
 		$price = $a[0]['ypdj'];
 		echo doubleval($price);
 		
+	}
+	
+	public function getconfig() {
+		$num = D('config')->getconfig('pagenum');
+		echo $num;
+	}
+	
+	public function geturl() {
+		$weobj = new \Vendor\Weixin\Wxq();
+		$backurl = "sanzond.hnsichuang.com/Home/Auth/login";
+		echo $weobj->getOAuth2url($backurl);
+	}
+	
+	public function geturlorder() {
+		$weobj = new \Vendor\Weixin\Wxq();
+		$backurl = "jf.sanzond.com/Home/Test/wxtest";
+		return $weobj->getOAuth2url($backurl);
+	}
+	
+	public function testlogin() {
+		if(!session('?userid')) {
+            $this->redirect('Auth/login');
+        }
+	}
+	
+	public function getserver() {
+		var_dump($_SERVER);die;
+	}
+	
+	public function chose() {
+		$arr = explode('.',$_SERVER['HTTP_HOST']);
+		echo $arr[0].'db';
+	}
+	
+	public function getgoods() {
+		$a = M('sangoods')->limit(10)->select();
+		echo $a[1]['thumbnails'];
+		if(isset($a[1]['thumbnails'])) {
+			echo 1;
+		} else {
+			echo 2;
+		}
+		if(isset($a[0]['thumbnails'])) {
+			echo $a[0]['thumbnails'];
+		} else {
+			echo 2;
+		}
+	}
+	
+	public function sendnews() {
+		$tys = new \Common\Docking\Tyswx();
+		$url = $this->geturlorder();
+		$result = $tys->sendNews('测试信息','你好啊！',$url,'');
+		echo $result;
+	}
+	
+	public function wxtest() {
+		/* 测试WX回调能否正常接收
+		*/
+		$state = I('state');
+		$wxqobj = new WxqController();
+		$userinfo = $wxqobj->getUserDeviceId();
+        $userid = $userinfo['UserId'];
+		echo $state;
+		echo "<br/>".$userid.'111';
+	}
+	
+	public function showerror() {
+		$this->error('失败');
+	}
+	
+	public function showsuccess() {
+		$this->success('成功');
+	}
+	
+	public function showsucc() {
+		echo C('TMPL_ACTION_SUCCESS');
+		echo C('TMPL_ACTION_ERROR');
 	}
 }

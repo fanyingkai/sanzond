@@ -4,27 +4,59 @@ body {
 	background: #eee;
 }
 
+header {
+	position:relative;
+}
 
-header ul {
+header .tab {
 	clear: both;
 	width: 100%;
 	border-bottom: 1px solid #ccc;
+	text-align: center;
+	overflow: hidden;
+	
 }
 
-header ul li {
+
+
+header .tab li{
+	
 	display: inline-block;
-	width: 32%;
+	width: 23%;
 	line-height: 40px;
 	text-align: center;
 
 }
 
-header ul .left {
+header .tab .left {
 	border-bottom: 1px solid rgb(109,203,239);
 }
 
+header .tab .right span {
+	margin-left:5px;
+}
+
+header .tab .right .more {
+	display:none;
+	position:absolute;
+	top:85px;
+	left:75%;
+	width: 23%;
+	border:1px solid #ccc;
+	border-radius: 5px;
+	box-shadow: 0px 0px 5px #888;
+	text-align:center;
+	background:#fff;
+	
+}
+header .tab .right .more a{
+	display:block;
+	line-height:40px;
+	border-bottom:1px solid #ccc;
+}
+
 .Hspacerlayer {
-	height: 91px;
+	height:0px;
 }
 
 .main ul li {
@@ -43,8 +75,13 @@ header ul .left {
 	margin-left: 15px;
 }
 
+.main ul li .status {
+	float:right;
+	color:#cd0000;
+}
+
 .main ul li .num span {
-	margin-left: 28px;
+	margin-left: 30px;
 }
 
 .main ul li .money span{

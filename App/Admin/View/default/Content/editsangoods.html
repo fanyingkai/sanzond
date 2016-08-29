@@ -1,0 +1,119 @@
+<extend name="Public:base" />
+<block name="head">
+<link href="/Public/tipplug/bootstrap/datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+<link href="/Public/tipplug/bootstrap/fileinput/css/fileinput.min.css" rel="stylesheet">
+</block>
+<block name="main">
+	<!-- Page Heading -->
+	<div class="row">
+	    <div class="col-lg-12">
+			<ol class="breadcrumb">
+			    <li>
+			        <i class="fa fa-dashboard"></i>  <a href="{:U('Index/index')}">仪表盘</a>
+			    </li>
+			    <li>
+			        <i class="fa fa-edit"></i> <a href="{:U('Content/ctmdisplay',array('logic'=>'sangoods','action'=>'list'))}">商品管理</a>
+			    </li>
+			     <li class="active">
+			        <i class="fa fa-edit"></i> 编辑商品
+			    </li>
+			</ol>
+	    </div>
+	</div>
+	<!-- /.row -->
+	
+    <div class="row">
+    <div class="col-lg-12">
+       <form role="form" action="{:U('Goods/save')}" method="post">
+	       <div class="form-group">
+               <label>商品名称</label>
+               <input class="form-control" type="text" placeholder="文章名称" name="ypm" value="{$ctminfo.ypm}">
+			   <h4>规格:{$ctminfo.gg}</h4><h4>厂家:{$ctminfo.ypcj}</h4>
+           </div>
+           <div class="form-group">
+               <label>缩略图</label>
+			   <img id="tupimgaaa" style="height:180px;width:180px;" class="img-thumbnail" src="/Uploads/{$ctminfo.thumbnails}" alt="http://placehold.it/48x48"/>
+               <input name="thumbnails" value="" id="thumbnails" type="hidden" value="{$ctminfo.thumbnails}"/>
+			   <input id="file-Portrait" type="file">
+           </div>
+           <div class="form-group">
+               <label>是否发布</label>
+               <label class="radio-inline">
+                   <input value='1' name="is_active" type="radio" <if condition="$ctminfo['is_active'] eq 1">checked="checked"</if>>是
+               </label>
+               <label class="radio-inline">
+                   <input value='0' name="is_active" type="radio" <if condition="$ctminfo['is_active'] eq 0">checked="checked"</if>>否
+               </label>
+           </div>
+		   <div class="form-group">
+               <label>是否新品</label>
+               <label class="radio-inline">
+                   <input value='1' name="is_new" type="radio" <if condition="$ctminfo['is_new'] eq 1">checked="checked"</if>>是
+               </label>
+               <label class="radio-inline">
+                   <input value='0' name="is_new" type="radio" <if condition="$ctminfo['is_new'] eq 0">checked="checked"</if>>否
+               </label>
+           </div>
+           <div class="form-group">
+               <label>是否首页推荐</label>
+               <label class="radio-inline">
+                   <input value='1' name="is_recommend" type="radio" <if condition="$ctminfo['is_recommend'] eq 1">checked="checked"</if>>是
+               </label>
+               <label class="radio-inline">
+                   <input value='1' name="is_recommend" type="radio" <if condition="$ctminfo['is_recommend'] eq 0">checked="checked"</if>>否
+               </label>
+           </div>
+           <div class="form-group">
+               <label>商品详情</label>
+               <textarea name="content" id="content" cols="30" rows="20"></textarea>
+           </div>
+		   <input type="hidden" name="id" value="{$ctminfo.nbbm}" />
+           <button type="submit" class="btn btn-primary" id="userbtn"> 提 交 </button>
+       </form>
+   </div>
+   </div>
+   <!-- /.row -->
+</block>
+<block name="js">
+<script type="text/javascript" charset="utf-8" src="/Public/tipplug/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/Public/tipplug/ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="/Public/tipplug/bootstrap/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/Public/tipplug/bootstrap/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<script type="text/javascript" charset="utf-8" src="/Public/tipplug/bootstrap/fileinput/js/fileinput.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/Public/tipplug/bootstrap/fileinput/js/fileinput_locale_zh.js"></script>
+<script type="text/javascript">
+    //实例化编辑器
+    //建议使用工厂方法getEditor创建和引用编辑器实例，如果在某个闭包下引用该编辑器，直接调用UE.getEditor('editor')就能拿到相关的实例
+    UE.getEditor('content');
+    $('#date_release').datetimepicker({
+  	  format:'yyyy-mm-dd HH:ii:ss',
+        weekStart: 1,
+        todayBtn:  1,
+		  autoclose: 1,
+	});
+</script>
+<script>
+/*初始化bootstrap文件上传控件*/
+function initFileInput(ctrlName, uploadUrl) {    
+    var control = $('#' + ctrlName); 
+    control.fileinput({
+        language: 'zh', //设置语言
+        uploadAsync: true,
+        uploadUrl: "{:U('Public/upload',array('type'=>'G'))}", //上传的地址
+        allowedFileExtensions : ['jpg','png','gif','jpeg'],//接收的文件后缀
+        showUpload: true, //是否显示上传按钮
+        showCaption: true,//是否显示标题
+        browseClass: "btn btn-primary", //按钮样式             
+        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+    });
+}
+$(function(){
+	initFileInput("file-Portrait", "/User/EditPortrait");
+});
+$("#file-Portrait").on("fileuploaded",function(event,data,previewld,index){
+	//alert(JSON.stringify(data));
+	//alert(data.response.url)
+	$('#thumbnails').val(data.response.url);
+})
+</script>
+</block>

@@ -15,7 +15,7 @@ class AdminController extends Controller {
      */
     public function cud_proxy($model,$layer='',$action='') {
         //验证用户是否有该操作权限
-        $this->auth_proxy($model, $action);
+        //$this->auth_proxy($model, $action);
         //执行用户操作
         $m = D($model,$layer);
         if($action=="D") {
@@ -41,14 +41,7 @@ class AdminController extends Controller {
     }
     
     public function auth_proxy($model,$action) {
-        $auth = new Auth();
-        $uid = session('user');
-        $uid = $uid['uid'];
-        $name = $model.'/'.$action;
-        if($auth->check($name, $uid)) {
-            return;
-        } else {
-            $this->error('您无权限操作此方法，请联系管理员',0,2);
-        }
+        //$auth = new Auth();
+		//此方法需要重写
     }
 }

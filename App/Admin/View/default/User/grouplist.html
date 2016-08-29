@@ -38,11 +38,11 @@
 		              </thead>
 		              <tbody>
 		                 <foreach name="grouplist" item="vo">
-		                  <tr <if condition="$vo['status'] != 1 ">class="danger"</if>>
+		                  <tr <if condition="$vo['is_active'] != 1 ">class="danger"</if>>
 		                      <td>{$key + 1 }</td>
-		                      <td>{$vo.title}</td>
+		                      <td>{$vo.name}</td>
 		                      <td>{$vo.rules}</td>
-		                      <td><if condition="$vo['status'] == 1 ">是
+		                      <td><if condition="$vo['is_active'] == 1 ">是
 		                      		<else /> 否
 		                      	  </if>
 		                      </td>

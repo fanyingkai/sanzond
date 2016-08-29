@@ -5,6 +5,9 @@
 <block name="head">
 	<link rel="stylesheet" href="__PUBLIC__/css/orderdetail.css">
 </block>
+<block name="backurl">
+{:U('Order/orderlist')}
+</block>
 <block name="pageinfo">4</block>
 <block name="other">
 	<ul class="tab">
@@ -17,7 +20,7 @@
 	</ul>
 </block>
 <block name="main">
-<div class="status">
+	<div class="status">
 		<if condition="checkstr('G',$order['status'])">
 		<div class="orderstatus">
 		 	<div class="left">
@@ -108,8 +111,11 @@
 		 	</div>
 		</div>
 		</if>
-		<if condition="$order['status'] == 'G'">
+		<if condition="$order['status'] == 'G' && $order['is_toerp'] neq '1'">
 		<button id="cancelorder">取消订单</button>	
+		</if>
+		<if condition="$order['status'] == 'GCS'">
+		<button id="conreturn">确认收货</button>	
 		</if>
 	</div>
 	
@@ -120,14 +126,15 @@
 				<li>
 					<span>订单号：</span>
 					<span>{$order.ordercode}</span>
-					<span class="right"><switch name="order.status">
-						<case value='G'>总部确认中</case>
-						<case value='GC'>已确认</case>
-						<case value='GCS'>已发货</case>
-						<case value='GCSR'>已收货</case>
-						<default/>已取消
-					</switch></span>
-					
+					<span class="right">
+						<switch name="order.status">
+							<case value='G'>等待总部确认中</case>
+							<case value='GC'>已确认</case>
+							<case value='GCS'>已发货</case>
+							<case value='GCSR'>已收货</case>
+							<default/>已取消
+						</switch>
+					</span>
 				</li>
 				<li>
 					<span>订单金额：</span>
@@ -169,6 +176,8 @@
 				<span class="name">{$vo.gname}</span>
 				<span class="num">x{$vo.quantity}</span>
 				<span class="price">￥{$vo.price}</span>
+				<span class="gg">{$vo.gg}</span>
+				<p>{$vo.factory}</p>
 			</li>
 			</foreach>
 		</ul>
@@ -180,6 +189,10 @@
 	$(function(){
 		$('#cancelorder').click(function(){
 			cancel('{$order.ordercode}',"{:U('Order/cancel')}");
+		});
+		
+		$('#conreturn').click(function(){
+			conreturn('{$order.ordercode}',"{:U('Order/conreturn')}");
 		});
 	});
 	var oDetail = $('.orderdetail');
@@ -212,10 +225,27 @@
 					if(data.status == 1) {
 						location.reload();
 					} else {
-						alert(data.info);
+						message('太阳升提醒',data.info);
 					}
 				}
 			});
+	}
+	
+	function conreturn(ordercode,url) {
+		if(!confirm('确定 确认收货？')) return;
+		$.ajax({
+			type:"post",
+			url:url,
+			dateType:"json",
+			data:{'ordercode':ordercode},
+			success:function(data) {
+				if(data.status == 1) {
+					location.reload();
+				} else {
+					message('太阳升提醒',data.info);
+				}
+			}
+		});
 	}
 </script>
 </block>

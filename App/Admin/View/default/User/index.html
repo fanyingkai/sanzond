@@ -21,7 +21,7 @@
 		        <select class="form-control" name="type">
 		            <option value="0">全 部 </option>
 		            <foreach name="typelist" item="tls" >
-					<option <if condition="$tls['id'] eq $type">selected = "selected"</if> value="{$tls.id}">{$tls.title}</option>
+					<option <if condition="$tls['id'] eq $type">selected = "selected"</if> value="{$tls.id}">{$tls.name}</option>
 					</foreach>
 		        </select>
 		    </div>

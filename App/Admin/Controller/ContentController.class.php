@@ -103,6 +103,7 @@ class ContentController extends AdminController{
         $sectionList = $sections->sectionstree();
         $this->assign('sectionList',$sectionList);
         $this->assign('page',$show);
+		$this->assign('keyword',$keyword);
         $this->display('list'.$logic);
     }
     

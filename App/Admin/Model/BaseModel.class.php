@@ -5,8 +5,7 @@ use Think\Model;
 class BaseModel extends Model {
     protected function auto_date_now(){
         $now = time();
-        $date_now = date("Y-m-d H:i:s",$now);
-        return $date_now;
+        return $now;
     }
     protected function getusername() {
         $username = session('user');

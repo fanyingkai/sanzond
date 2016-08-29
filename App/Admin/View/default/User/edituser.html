@@ -22,7 +22,7 @@
 	           <label>所属用户组</label>
 	           <select class="form-control" name="gid">
 	           	   <foreach name="grouplist" item="vo">
-	               <option value="{$vo.id}" <if condition="$userinfo['gid'] eq $vo['id']">selected="selected"</if>>{$vo.title}</option>
+	               <option value="{$vo.id}" <if condition="$userinfo['gid'] eq $vo['id']">selected="selected"</if>>{$vo.name}</option>
 	               </foreach>
 	           </select>
 	       </div>          

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>错误页面</title>
+	<link rel="stylesheet" href="/App/Home/View/default/Public/iconfont.css">
+	<style>
+body{
+	font-family:"微软雅黑",Helvetica,Microsoft Yahei,Hiragino Sans GB,WenQuanYi Micro Hei,sans-serif;
+	background: #fff;
+	margin:0;
+}
+p {
+	margin:0;
+}
+
+.main {
+	margin:150px 0;
+}
+
+.main .img {
+	width:100%;
+}
+
+.main .img span {
+	display:block;
+	text-align:center;
+	font-size:1000%;
+}
+
+
+
+.main .content p{
+	display:block;
+	width: 80%;
+	margin:0 auto;
+	text-align: center;
+	line-height: 60px;
+	font-size: 48px;
+	color: #666;
+}
+
+.main .content h4{
+	text-align: center;
+	font-size:58px;
+	color: #666;
+}
+</style>
+</head>
+<body>
+	<div class="main">
+		<div class="img">
+			<span class="iconfont">&#xe641;</span>
+		</div>
+		<div class="content">
+			<h4>错误！</h4>
+			<p class="message">提示: <?php echo $error; ?>,系统<span id="wait"><?php echo($waitSecond); ?></span>s后
+			<a id="href" href="<?php echo($jumpUrl); ?>">跳转</a></p>
+		</div>
+	</div>
+</body>
+
+<script>
+(function(){
+var wait = document.getElementById('wait'),href = document.getElementById('href').href;
+var interval = setInterval(function(){
+	var time = --wait.innerHTML;
+	if(time <= 0) {
+		location.href = href;
+		clearInterval(interval);
+	};
+}, 1000);
+})()
+</script>
+</html>

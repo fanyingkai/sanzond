@@ -3,13 +3,15 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
-	<title><block name="title">太阳升订药系统</block></title>
+	<title><block name="title">{$config.webname}</block></title>
 	<link rel="stylesheet" href="__PUBLIC__/css/common.css">
 	<link rel="stylesheet" href="/Public/Static/Public/css/font.css" type="text/css">
 	<link rel="stylesheet" href="/Public/Static/Public/css/smallred.css" type="text/css">
+	<link rel="stylesheet" href="/Public/Static/Public/css/note.css" type="text/css">
 	<link rel="stylesheet" href="/Public/Static/Public/css/empty.css">
 	<script src="/Public/tipplug/jquery/jquery.min.js"></script>
 	<script src="/Public/Static/Public/js/empty.js"></script>
+	<script src="/Public/Static/Public/js/note.js"></script>
 	<block name="head"></block>
 </head>
 <body>
@@ -28,7 +30,7 @@
 			</div>
 			</block>
 			<block name="right">
-			<a href="tel:18889562302">
+			<a href="tel:{$config.phone}">
 			<span class="phone iconfont">&#xe61f;</span>
 			</a>
 			</block>
@@ -64,7 +66,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="{:U('Order/orderlist')}">
+				<a href="{:U('Order/gettypeolist',array('type'=>urlencode('WC')))}">
 					<p class="iconfont">&#xe636;</p>
 					<p>订单</p>
 				</a>

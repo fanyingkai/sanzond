@@ -8,7 +8,7 @@ class UserController extends ContentController {
 	public function index() {
 		$model = D('sanuser','Logic');
 		$userinfo = $model->getuserinfo();
-		$contacts = $model->getUsercontact();
+		$contacts = $model->getUsercontactc();
 		$cname = $userinfo['cname'];
 		$this->assign('cname',$cname);
 		$this->assign('contacts',$contacts);
@@ -30,7 +30,7 @@ class UserController extends ContentController {
 		if($_POST['name']=='') $this->error('联系人不能为空');
 		if($_POST['address']=='') $this->error('地址不能为空');
 		if($_POST['phone']=='') $this->error('手机号不能为空');
-		$model = D('user','Logic');
+		$model = D('sanuser','Logic');
 		$addAddress = $model->createAddress($_POST);
 		if($addAddress){
 			$this->success('添加成功',U('User/index'));

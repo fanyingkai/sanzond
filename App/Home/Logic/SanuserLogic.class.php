@@ -12,6 +12,13 @@ class SanuserLogic extends BaseLogic {
 		return $info;
 	}
 	
+	public function getcompany($companyname) {
+		$where = array('name'=>$companyname);
+		$field = 'id';
+		$info = M('company')->field($field)->where($where)->find();
+		return $info;
+	} 
+	
 	/**
 	* 得到用户联系信息
 	*/
@@ -24,11 +31,19 @@ class SanuserLogic extends BaseLogic {
 			return $usercontactlist;
 		} else {
 			$field = 'cname,name';
-			$userinfo = M('user')->field()->where($where)->find();
+			$userinfo = M('sanuser')->field()->where($where)->find();
 			$m = M('company');
 			$companyinfo = $m->field('contacts as name,address')->where("name='{$userinfo['cname']}'")->select();
 			return $companyinfo;	
 		}
+	}
+	
+	public function getUsercontactc() {
+		$model = M('user_contacts');
+		$userid = getuserid();
+		$where = "userid = '{$userid}'";
+		$usercontactlist = $model->field('id,name,phone,address')->where($where)->select();
+		return $usercontactlist;
 	}
 	
 	/*

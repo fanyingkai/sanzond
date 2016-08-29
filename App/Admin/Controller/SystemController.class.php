@@ -28,6 +28,8 @@ class SystemController extends AdminController{
         $confM = D('Config');
         $config = $confM->where(array('id'=>$id))->find();
         $typelist = $confM->distinct(true)->field('type')->select();
+		$str = chosedb().'config';
+		S($str,null);
         $this->assign('typelist',$typelist);
         $this->assign('config',$config);
         $this->display();
@@ -35,6 +37,8 @@ class SystemController extends AdminController{
     
     public function delconfig() {
         $id = $_POST['id'];
+		$str = chosedb().'config';
+		S($str,null);
         $result = D('Config')->where(array('id'=>$id))->delete();
         if($result) {
             $json['status'] = '1';
@@ -44,6 +48,5 @@ class SystemController extends AdminController{
             $json['info'] = '删除失败！请重新尝试';
             $this->ajaxReturn($json);
         }
-        
     }
 }

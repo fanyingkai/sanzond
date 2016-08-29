@@ -12,7 +12,7 @@ class HomeController extends Controller{
         $this->assign('config',$config);
     }
     
-    public function ajaxReturn($status,$info,$data) {
+    public function ajaxReturn($status=0,$info='',$data=0) {
         $json['status'] = $status;
         $json['info'] = $info;
         $json['data'] = $data;

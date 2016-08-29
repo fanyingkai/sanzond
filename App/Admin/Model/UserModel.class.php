@@ -26,33 +26,10 @@ class UserModel extends BaseModel{
     );
     
     protected function _after_insert($data,$options) {
-        $agcd['uid'] = $data['id'];
-        $agcd['group_id'] = $data['gid'];
-        $agc = M('auth_group_access');
-        $result = $agc->add($agcd);
-        if($result) {
-            return;
-        } else {
-            die($agc->getError());
-            return;
-        }
+       
     }
     
     protected function _before_update($data, $options) {
-        $gid = $data['gid'];
-        $uid = $data['id'];
-        $agcm = M('auth_group_access');
-        $agc = $agcm->where(array('id'=>$uid))->find();
-        if($agc['group_id']==$gid) {
-            return;
-        } else {
-            $agc = $agcm->where(array('uid'=>$uid))->setField('group_id',$gid);
-            if($agc) {
-                return;
-            } else {
-                die($agcm->getError());
-                return ;
-            }
-        }
+		
     }
 }

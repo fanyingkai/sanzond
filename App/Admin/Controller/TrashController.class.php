@@ -30,12 +30,7 @@ class TrashController extends AdminController{
     
     public function delctm() {
         $logic = I('logic','');
-        if(!($this->auth_del($logic)) ) {
-            $json['status'] = 0;
-            $json['info'] = "没有权限";
-            $this->ajaxReturn($json);
-            return;
-        }
+        //缺少权限验证
         $model = D($logic,'Logic');
         $id = I('id','');
         $result = $model->where(array('id'=>$id))->setField('is_active','3');
@@ -77,18 +72,6 @@ class TrashController extends AdminController{
             $json['info'] = $model->getError();
         }
         $this->ajaxReturn($json);
-    }
-    
-    public function auth_del($logic) {
-        $auth = new Auth();
-        $uid = session('user');
-        $uid = $uid['uid'];
-        $name = $logic.'/D';
-        if($auth->check($name, $uid)) {
-            return true;
-        } else {
-            return false;
-        }
     }
     
 }

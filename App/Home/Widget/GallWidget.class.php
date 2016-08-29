@@ -7,8 +7,8 @@ class GallWidget extends Controller {
      * 幻灯片
      */
     public function banner() {
-        //$banner = M('banner')->field('id,img_url')->select();
-        //$this->assign('banner',$banner);
+        $banner = M('banner')->field('id,url,img_url')->where('is_active = 1')->select();
+        $this->assign('banner',$banner);
         $this->display('Widget:banner');
     }
     

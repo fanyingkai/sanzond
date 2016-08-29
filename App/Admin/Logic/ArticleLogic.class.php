@@ -19,6 +19,7 @@ class ArticleLogic extends BaseLogic{
         array('updater','getusername',self::MODEL_UPDATE,'callback'),
     );
     
+	//实现查询规则
     public function search($secid,$keyword='') {
         //$where = "name like '%{$keyword}%' or description like '%{$keyword}%' or content like '%{$keyword}%'";
         if($secid==0) {
@@ -54,6 +55,7 @@ class ArticleLogic extends BaseLogic{
         return $a;
     }
     
+	//实现删除规则
     public function trash() {
         $list = $this->field('id,name,updater,date_update')->where(array('is_active'=>'3'))->select();
         return $list;

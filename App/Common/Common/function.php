@@ -80,13 +80,26 @@ function http( $url, $method = 'GET', array $postfields = array(), array $header
     curl_close ($ci);
     return $response;
 }
-
+/**
+ * 得到用户的userid
+ */
 function getuserid() {
-    return base64_decode(session('userid'));
+	if(session('?userid')) {
+		return base64_decode(session('userid'));
+	} else {
+		return '';
+	}
 }
 
+/**
+ * 得到用户的uid，订单系统自带的用户id
+ */
 function getuid() {
-	return base64_decode(session('uid'));
+	if(session('?uid')) {
+		return base64_decode(session('uid'));
+	} else {
+		return '';
+	}
 }
 
 /**
@@ -100,4 +113,19 @@ function writelog($event,$type,$remark) {
 	$data['client_ip'] = get_client_ip();
 	$data['date_joined'] = time();
 	M('log')->add($data);
+}
+
+/**
+ * 根据访问域名选择对应的数据库配置文件
+ */
+function chosedb() {
+	$arr = explode('.',$_SERVER['HTTP_HOST']);
+	return $arr[0].'db';
+}
+/**
+ * 缓存附加规则，将缓存文件名添加对应数据库名称
+ */
+function choseshtml($str) {
+	$str = $str.chosedb();
+	return $str;
 }

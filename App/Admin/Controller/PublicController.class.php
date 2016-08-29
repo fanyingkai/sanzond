@@ -27,7 +27,7 @@ class PublicController extends Controller {
             'gid'       =>$user['gid'],
             'username'  =>$user['username'],
         );
-        $Model->where(array('id'=>$usersession['uid']))->setField('last_login',date("Y-m-d H:i:s",time()));
+        $Model->where(array('id'=>$usersession['uid']))->setField('last_login',time());
         session('user',$usersession);
         //记录日志
         recordlog('登录后台系统','系统操作');
@@ -46,14 +46,11 @@ class PublicController extends Controller {
             case 'A':
                 $url = 'Article/';
                 break;
-            case 'H':
-                $url = 'House/';
+            case 'G':
+                $url = 'Goods/';
                 break;
             case 'B':
                 $url = 'Banner/';
-                break;
-            case 'CWS':
-                $url = 'Cws/';
                 break;
             default:
                 break;

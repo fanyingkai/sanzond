@@ -60,11 +60,13 @@ body {
 }
 
 .main .goodsinfo ul li {
-	line-height: 35px;
+	line-height: 30px;
+	border-bottom:1px dashed #ccc;
 }
 
 .main .goodsinfo ul li .name {
-	margin-right: 20px;
+	margin-right: 10px;
+	font-weight:bold;
 }
 .main .goodsinfo ul li .price {
 	float: right;

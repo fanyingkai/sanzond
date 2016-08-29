@@ -3,6 +3,9 @@
 <block name="head">
 	<link rel="stylesheet" href="__PUBLIC__/css/stores.css">
 </block>
+<block name="backurl">
+{:U('Index/index')}
+</block>
 <block name="pageinfo">5</block>
 <block name="main">
 	<div class="main">
@@ -46,13 +49,18 @@
 		<div class="headquarters">
 			<ul>
 				<li>	
+					<span class="iconfont left">&#xe610;</span>
+					<span class="text">公司名称：{$config.companyname}</span>
+					<!-- <span class="iconfont choise">&#xe688;</span> -->
+				</li>
+				<li>	
 					<span class="iconfont left">&#xe61f;</span>
-					<span class="text">总部电话：17889846353</span>
+					<span class="text">总部电话：{$config.phone}</span>
 					<!-- <span class="iconfont choise">&#xe688;</span> -->
 				</li>
 				<li>	
 					<span class="iconfont left">&#xe61e;</span>
-					<span class="text">总部地址：海南省海口市</span>	
+					<span class="text">总部地址：{$config.address}</span>	
 					<div class="address">
 						<img src="img/address.png" alt="">
 					</div>

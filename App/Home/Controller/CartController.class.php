@@ -58,27 +58,18 @@ class CartController extends HomeController {
     }
     
     /**
-     * 调式函数，调试购物车
-     * @param number $clear
-     */
-    public function getsession($clear=0) {
-        var_dump($_SESSION);
-        if($clear == 1) {
-            session(null);
-        }
-    }
-    
-    /**
      * 去确认页面
      */
     public function confirmcart() {
         $model = D('cart','Logic');
 		$userm = D('sanuser','Logic');
-        $goodslist = $model->getcartlist();
+        $result = $model->getcartlist();
 		$contacts = $userm->getUsercontact();
 		//var_dump($contacts);die;
 		$this->assign('contacts',$contacts);
-        $this->assign('goodslist',$goodslist);
+		$this->assign('totalprice',$result['totalprice']);
+		$this->assign('totalquantity',$result['totalquantity']);
+        $this->assign('goodslist',$result['cartlist']);
         $this->display('Content/confirmO');
     }
     

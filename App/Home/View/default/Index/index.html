@@ -25,7 +25,7 @@
 	<div class="main">
 		<ul class="type">
 			<foreach name="category" item="vo">
-			<if condition="$key gt 5">
+			<if condition="$key gt 4">
 			<li style="display:none">
 				<a href="{:U('Goods/getcategorygoods',array('category'=>urlencode($vo['dmmc'])))}">{$vo.dmmc}</a>
 			</li>
@@ -34,65 +34,95 @@
 				<a href="{:U('Goods/getcategorygoods',array('category'=>urlencode($vo['dmmc'])))}">{$vo.dmmc}</a>
 			</li>
 			</if>
-			
-			</foreach>
-			<li>
-				<a href="#">更多</a>
+			<if condition="$key eq 4">
+			<li id="showmore">
+				<a  href="javascript:showmore()">更多</a>
 			</li>
+			</if>
+			</foreach>
 		</ul>
 	</div>
-	
+	<!--
+	<h4 class="title">总部公告</h4>
+	<div class="bulletin">
+		<div class="leftb">
+			<img src="__PUBLIC__/img/none.png" alt="">
+		</div>
+		<div class="rightb">
+		<ul>
+			<a href="{:U('Index/bulletin')}" class="one">
+				<li>
+					<span>公告</span>
+					<p>防守对方不是打击腐败接受范围我你是否士大夫范围我你是否士大夫范围我你是否士大夫</p>
+				</li>
+				<li>
+					<span>公告</span>
+					<p>防守对方不是打击腐败接受范围我你是否士大夫</p>
+				</li>
+				<li>
+					<span>公告</span>
+					<p>防守对方不是打击腐败接受范围我你是否士大夫</p>
+				</li>
+			</a>
+			<a href="{:U('Index/bulletin')}" class="two">
+				<li>
+					<span>公告</span>
+					<p>防守对方不是打击腐败接受范围我你是否士大夫范围我你是否士大夫范围我你是否士大夫</p>
+				</li>
+				<li>
+					<span>公告</span>
+					<p>防守对方不是打击腐败接受范围我你是否士大夫</p>
+				</li>
+				<li>
+					<span>公告</span>
+					<p>防守对方不是打击腐败接受范围我你是否士大夫</p>
+				</li>
+			</a>	
+		</ul>
+	</div>
+	-->
 	<h4 class="title">新品推荐</h4>
+	
 	<ul class="new">
-		<li class="leftli">
+		<div class="center_line"></div>
+		<foreach name="newgoods" item="vo">
+		<a href="{:U('Goods/getgoodsdetail',array('id'=>$vo['nbbm']))}">
+		<li>
 			<div class="left">
-				<p class="name">阿司匹林</p>
-				<p class="info"><span style="color:#cd0000">>></span>够新&nbsp;够实惠</p>
+				<p class="name">{$vo.ypm}</p>
+				<p class="info"><span style="color:#cd0000">>></span>了解更多</p>
 			</div>
 			<div class="right">
 				<div class="img">
-					<img src="__PUBLIC__/img/amxl.jpg" alt="">
+					<img src="<if condition="$vo['thumbnails'] neq ''">/Uploads/{$vo.thumbnails}<else/>__PUBLIC__/img/none.png</if>" alt="{$vo.ypm}">
 				</div>
 			</div>
 		</li>
-		<li class="rightli">
-			<div class="left">
-				<p class="name">阿司匹林</p>
-				<p class="info"><span style="color:#cd0000">>></span>&nbsp;够实惠</p>
-			</div>
-			<div class="right">
-				<div class="img">
-					<img src="__PUBLIC__/img/amxl.jpg" alt="">
-				</div>
-			</div>
-		</li>
-	</ul>
-	<ul class="new">
-		<li class="leftli">
-			<div class="left">
-				<p class="name">阿司匹林</p>
-				<p class="info"><span style="color:#cd0000">>></span>&nbsp;够实惠</p>
-			</div>
-			<div class="right">
-				<div class="img">
-				<img src="__PUBLIC__/img/amxl.jpg" alt="">
-			</div>
-			</div>
-		</li>
-		<li class="rightli">
-			<div class="left">
-				<p class="name">阿司匹林</p>
-				<p class="info"><span style="color:#cd0000">>></span>&nbsp;够实惠</p>
-			</div>
-			<div class="right">
-			<div class="img">
-				<img src="__PUBLIC__/img/amxl.jpg" alt="">
-			</div>
-				
-			</div>
-		</li>
+		</a>
+		</foreach>
 	</ul>	
+	<div class="Fspacerlayer "></div>
 <!-- 主体结束 -->
 </block>
 <block name="js">
+<script>
+	function showmore() {
+		$('.type li').show();
+		$('#showmore').remove();
+	}
+
+	<!-- 轮播 -->
+    carousel_small();
+    function carousel_small(){
+    	$('.bulletin .rightb ul .one').delay(2000).animate({ 'top':'-89px' },function(){
+    		$('.bulletin .rightb ul .one').css('top','89px');
+	    	$('.bulletin .rightb ul .two').animate({ 'top':'8'});
+	    	$('.bulletin .rightb ul .two').delay(2000).animate({ 'top':'-89px' },function(){
+	    		$('.bulletin .rightb ul .two').css('top','89px');
+	    		$('.bulletin .rightb ul .one').animate({ 'top':'8'},carousel_small);
+	    		
+	   		 });
+   		});
+    }
+</script>
 </block>

@@ -4,6 +4,10 @@ body {
 	background: #eee;
 }
 
+header {
+	z-index:444;
+}
+
 header ul {
 	clear: both;
 	width: 100%;
@@ -261,7 +265,17 @@ header ul .right {
 }
 
 .orderdetail .goodsinfo li {
-	line-height: 35px;
+	padding-top:5px;
+	line-height: 30px;
+	border-bottom:1px dashed #ccc;
+}
+
+.orderdetail .goodsinfo li p {
+	margin-bottom:5px;
+}
+
+.orderdetail .goodsinfo li .name {
+	font-weight:bold;
 }
 
 .orderdetail .goodsinfo li .price {
@@ -271,4 +285,8 @@ header ul .right {
 }
 .orderdetail .goodsinfo li .num {
 	float: right;
+}
+
+footer {
+	z-index:444;
 }

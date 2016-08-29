@@ -10,13 +10,14 @@ class orderLogic extends BaseLogic {
 		if(!session('?cart')) return;
 		$ordercode = $this->createordercode();
 		//生成并保存详情
-		$goods = D('goods','Logic');
+		$goods = D('sangoods','Logic');
         $arr = session('cart');
         $userid = getuserid();
         $cartlist = array();
         $i = 0;
 		$totalquantity = 0;
 		$totalprice = 0;
+		$time = time();
         foreach($arr as $k=>$v) {
             $gdetail = $goods->getgoodsdetaily($k);
 			$cartlist[$i]['ordercode']=$ordercode;
@@ -28,7 +29,8 @@ class orderLogic extends BaseLogic {
             $cartlist[$i]['rsp'] = $gdetail['lsj'];
             $cartlist[$i]['factory'] = $gdetail['ypcj'];
             $cartlist[$i]['quantity'] = $v;
-			$cartlist[$i]['date_joined'] = time();
+			$cartlist[$i]['date_joined'] = $time;
+			$cartlist[$i]['orderdate'] = date("Y-m-d H:i:s",$time);
 			$totalquantity = $totalquantity + $v;
 			$totalprice = floatval($totalprice) + floatval($v * $gdetail['ypdj']);
             $i++;
@@ -36,6 +38,11 @@ class orderLogic extends BaseLogic {
 		$result = M('orderdetail')->addAll($cartlist);
 		if($result) {
 			//保存订单详情成功，生成主体订单
+			$clientm = D('sanuser','Logic');
+			$clientd = $clientm->getuserinfo();
+			$companyname = $clientm->getcompany($clientd['cname']);
+			$companyid = $companyname['id'];
+			$order['client'] = $clientd['cname'];
 			$order['ordercode'] = $ordercode;
 			$order['totalquantity'] = $totalquantity;
 			$order['totalprice'] = $totalprice;
@@ -44,7 +51,10 @@ class orderLogic extends BaseLogic {
 			$order['phone'] = $_POST['phone'];
 			$order['contact'] = $_POST['name'];
 			$order['address'] = $_POST['address'];
-			$order['date_joined'] = time();
+			$order['date_joined'] = $time;
+			$order['wxuserid'] = getuserid();
+			$order['orderdate'] = date("Y-m-d H:i:s",$time);
+			$order['clientId'] = $companyid;
 			$oresult = $this->add($order);
 			if($oresult) {
 				$arr['errcode'] = 0;
@@ -72,7 +82,7 @@ class orderLogic extends BaseLogic {
      * 生成订单编号
      */
 	public function createordercode() {
-		$time = time();
+		$time = date("YmdHis",time());
 		$uid = getuid();
 		$ordercode = 'wx'.$uid.$time;
 		$where = "ordercode = '{$ordercode}'";
@@ -89,11 +99,20 @@ class orderLogic extends BaseLogic {
 	public function getorderdetail($ordercode) {
 		$where = "ordercode = '{$ordercode}'";
 		$order = $this->where($where)->find();
-		$field = 'quantity,price,gname';
+		$field = 'quantity,price,gname,gg,factory';
 		$detail = M('orderdetail')->field($field)->where($where)->select();
 		$result['order'] = $order;
 		$result['detail'] = $detail;
 		return $result;
+	}
+	
+	/**
+	 * 得到单个订单主体信息
+	 */
+	public function getorderinfo($ordercode) {
+		$where = "ordercode = '{$ordercode}'";
+		$info = $this->where($where)->find();
+		return $info;
 	}
 	
 	/**
@@ -102,7 +121,7 @@ class orderLogic extends BaseLogic {
 	public function getorderlist() {
 		$userid = getuserid();
 		$where = "create_uid = '{$userid}'";
-		$field = 'ordercode,totalprice,date_joined';
+		$field = 'ordercode,totalprice,date_joined,status';
 		$orderlist = $this->order('date_joined desc')->where($where)->limit(20)->select();
 		return $orderlist;
 	}
@@ -126,8 +145,8 @@ class orderLogic extends BaseLogic {
 	
 	public function gettypeolist($where) {
 		$where['create_uid']=getuserid();
-		$field = 'ordercode,totalprice,date_joined';
-		$list = $this->where($where)->field($field)->select();
+		$field = 'ordercode,totalprice,date_joined,status';
+		$list = $this->where($where)->order('date_joined desc')->field($field)->select();
 		return $list;
 	}
 	/**

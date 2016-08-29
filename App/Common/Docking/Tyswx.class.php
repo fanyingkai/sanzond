@@ -11,9 +11,26 @@ class Tyswx {
 		$enbody = $this->san_encrypt($msg);
 		$data = array('UID'=>$userid,'body'=>$enbody);
 		$result = http(Tyswx::SAN_URL,"post",$data);
-		echo $result;
+		return $result;
 	}
 	
+	/**
+	 * 调用太阳升发送news消息接口
+	 */
+	public function sendNews($title,$description,$url,$picurl,$userid='18889562302') {
+		$endescription = $this->san_encrypt($description);
+		$entitle = $this->san_encrypt($title);
+		$news = array(
+			'UID'=>$userid,
+			'body'=>$endescription,
+			'Type'=>'News',
+			'Title'=>$entitle,
+			'url'=>$url,
+			'PicUrl'=>$picurl,
+		);
+		$result = http(Tyswx::SAN_URL,"post",$news);
+		return $result;
+	}
 	/**
 	 * 太阳升加密
 	 */
@@ -31,5 +48,11 @@ class Tyswx {
 				$enbody = $enbody.'o'.$tem;
 		}
 		return $enbody;
+	}
+	
+	public function synchronize() {
+		$user = M()->db(1,'sqlsrv://soa:im123654im@112.67.32.141:8001/jxc#utf8');
+		$result = $user->query('select * from zy_sys2_ypzdk');
+		var_dump($result);die;
 	}
 }

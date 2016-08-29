@@ -56,7 +56,7 @@ header .navigation .div .iconfont {
 	padding-top: 5px;
 	padding-bottom: 25px;
 	border-bottom: 1px solid #ccc;
-	height:100px;
+	height:130px;
 }
 
 .main ul li .left {
@@ -102,43 +102,58 @@ header .navigation .div .iconfont {
 }
 
 .main ul li .right .num {
-	
+	margin-top:5px;
+	display:block;
 	color:#888;
 }
 .main ul li .right .addsub {
-	margin-top: 10px;
+	margin-top: 5px;
+	line-height:37px;
+	box-sizing: border-box;
+	
 }
-
 
 .main ul li .right .addsub button {
-	display: inline-block;
 	padding:0;
 	margin:0;
-	border:1px solid #ccc;
-	width: 30px;
-	height: 28px;
+	display:inline-block;
+	background:#eee;
+	border:1px solid rgb(204,204,204);
+	width: 34px;
+	height:36px;
+	z-index:-1;
+	
+	
 }
 .main ul li .right .addsub input{
-	z-index: -1;
-	width: 40px;
-	height: 24px;
-	border: none;
-	border-top:1px solid #ccc;
-	border-bottom:1px solid #ccc;
-	margin:-4px;
+	display:inline-block;
+	z-index: 1;
+	background:#fff;
+	border-radius:0;
+	box-shadow:none;
+	padding:0;
+	margin:0;
+	width: 55px;
+	height: 34px;
+	border:1px solid rgb(204,204,204);	
 	text-align: center;
+	
+	
 }
 
 
 .main ul li .right .addsub .sub {
 	border-top-left-radius:5px;
 	border-bottom-left-radius:5px;
-
+	border-right:none;
+	margin-right:-4px;
 }
 
 .main ul li .right .addsub .add {
 	border-top-right-radius:5px;
 	border-bottom-right-radius:5px;
+	border-left:none;
+	margin-left:-4px;
 }
 
 

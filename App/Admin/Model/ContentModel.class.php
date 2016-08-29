@@ -51,24 +51,24 @@ EOT;
         
         //创建相关数据库
         $sql = <<<EOT
-CREATE TABLE IF NOT EXISTS `{tablename}` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `secid` int(11) NOT NULL,
-  `name` varchar(36) NOT NULL,
-  `description` varchar(255) NOT NULL COMMENT '描述',
-  `is_active` int(1) NOT NULL,
-  `is_hot` int(1) NOT NULL,
-  `is_recommend` int(1) NOT NULL,
-  `date_joined` datetime NOT NULL COMMENT '添加时间',
-  `date_update` datetime DEFAULT NULL COMMENT '最后一次更新时间',
-  `date_release` datetime NOT NULL COMMENT '发布时间',
-  `founder_uid` int(11) NOT NULL,
-  `founder` varchar(48) NOT NULL,
-  `updater_uid` int(11) NOT NULL,
-  `updater` varchar(48) NOT NULL,
-  `sort` int(6) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='{remark}' AUTO_INCREMENT=1 ;
+CREATE TABLE {tablename} (
+  id int(11) NOT NULL,
+  secid int(11) NOT NULL,
+  name varchar(36) NOT NULL,
+  description varchar(255) NOT NULL,
+  is_active int(1) NOT NULL,
+  is_hot int(1) NOT NULL,
+  is_recommend int(1) NOT NULL,
+  date_joined varchar(10),
+  date_update varchar(10),
+  date_release varchar(10) NOT NULL,
+  founder_uid int(11) NOT NULL,
+  founder varchar(48) NOT NULL,
+  updater_uid int(11) NOT NULL,
+  updater varchar(48) NOT NULL,
+  sort int(6) NOT NULL,
+  PRIMARY KEY (id)
+);
 EOT;
         $tablename = C('DB_PREFIX').$data['logicname'];
         $remark = $data['name']."内容模型";
